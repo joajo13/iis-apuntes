@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 · Introducción — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>01 · Introducción</strong></span>
+  <span class="nav-links"><a href="index.html">◄ Índice</a> <a href="02-ciclos-de-vida.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 01</span>
+    <h1>Introducción a la ingeniería de software</h1>
+    <p class="sub">De dónde viene la disciplina, qué es un producto, cualidades, principios y la tesis de Brooks.</p>
+  </div>
+
+  <h2>¿De dónde viene esto?</h2>
+  <p>En <strong>1968</strong>, la OTAN organizó la primera conferencia sobre desarrollo de software. Ahí nacieron dos términos que siguen vigentes:</p>
+  <div class="grid">
+    <div class="card err">
+      <h3 style="margin-top:0">Crisis del software</h3>
+      <p>Proyectos que se pasaban de costo y tiempo, o directamente se cancelaban. Los que se completaban tenían mantenimiento carísimo.</p>
+    </div>
+    <div class="card ok">
+      <h3 style="margin-top:0">Ingeniería del software</h3>
+      <p>La disciplina que busca resolver la crisis aplicando métodos, técnicas y herramientas sistemáticas.</p>
+    </div>
+  </div>
+
+  <h2>Las 3 definiciones clave</h2>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="bauer">Bauer (1968)</button>
+      <button class="tab-btn" data-tab="ieee">IEEE (1993)</button>
+      <button class="tab-btn" data-tab="boehm">Boehm</button>
+    </div>
+    <div class="tab-panel active" data-tab="bauer">
+      <blockquote>"Establecimiento y uso de <strong>principios de ingeniería</strong> para obtener software económico que trabaje de forma eficiente en máquinas reales."</blockquote>
+    </div>
+    <div class="tab-panel" data-tab="ieee">
+      <blockquote>"La aplicación de <strong>métodos sistemáticos, disciplinados y cuantificables</strong> para el desarrollo, operación y mantenimiento de software."</blockquote>
+    </div>
+    <div class="tab-panel" data-tab="boehm">
+      <blockquote>"La <strong>aplicación práctica del conocimiento científico</strong> al diseño y construcción de programas y la documentación asociada requerida para desarrollarlos, operarlos y mantenerlos."</blockquote>
+    </div>
+  </div>
+
+  <h2>Producto y proceso</h2>
+  <pre class="mermaid">
+flowchart LR
+    R[Requerimientos del usuario] --> P[Proceso de software<br/>actividades]
+    P --> PR[Producto de software]
+    PR --> C[Código fuente]
+    PR --> D[Documentación]
+    PR --> T[Datos de prueba]
+    PR --> M[Manuales]
+  </pre>
+  <div class="card accent">
+    <p><strong>Producto</strong> ≠ solo el ejecutable. Incluye el código, la documentación de requerimientos, diseño, datos de prueba, manuales. <strong>Todo</strong>.</p>
+  </div>
+
+  <h2>Sistemas vs. software</h2>
+  <p>Un <strong>sistema</strong> (IEEE 610.12) es una colección de componentes organizados para cumplir una función. Los componentes son:</p>
+  <div class="grid">
+    <div class="card">💻 Software</div>
+    <div class="card">🔩 Hardware</div>
+    <div class="card">👥 Gente</div>
+    <div class="card">🗄️ Base de datos</div>
+    <div class="card">📄 Documentación</div>
+    <div class="card">📋 Procedimientos</div>
+  </div>
+  <p>El <strong>software</strong> es uno de esos componentes — lógico, no físico. Puede ser un sistema independiente o un subsistema. Ej: el GPS del celular es un subsistema del software del celular.</p>
+
+  <h2>Calidad y visiones por actor</h2>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="u">👤 Usuario</button>
+      <button class="tab-btn" data-tab="d">🧑‍💻 Desarrollador</button>
+      <button class="tab-btn" data-tab="g">📊 Gerente</button>
+    </div>
+    <div class="tab-panel active" data-tab="u"><p>Confiable, eficiente, fácil de usar.</p></div>
+    <div class="tab-panel" data-tab="d"><p>Verificable y mantenible.</p></div>
+    <div class="tab-panel" data-tab="g"><p>Productividad y eficiencia del proceso.</p></div>
+  </div>
+
+  <h2>Cualidades del software (Ghezzi)</h2>
+  <p>Se clasifican en <strong>internas</strong> (relevantes para el desarrollador) y <strong>externas</strong> (visibles para el usuario).</p>
+  <table>
+    <thead><tr><th>Cualidad</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Correctitud</strong></td><td>Se comporta según su especificación funcional.</td></tr>
+      <tr><td><strong>Confiabilidad</strong></td><td>El usuario puede depender de él (probabilidad de operar como se esperaba).</td></tr>
+      <tr><td><strong>Robustez</strong></td><td>Se comporta razonablemente en situaciones no anticipadas.</td></tr>
+      <tr><td><strong>Performance</strong></td><td>Usa tiempo y memoria en forma económica.</td></tr>
+      <tr><td><strong>Amigabilidad</strong></td><td>Fácil de usar — no solo la interfaz, también la correctitud y la velocidad.</td></tr>
+      <tr><td><strong>Verificabilidad</strong></td><td>Fácil de probar. El diseño modular ayuda mucho.</td></tr>
+      <tr><td><strong>Mantenibilidad</strong></td><td>Fácil de modificar después de la entrega.</td></tr>
+      <tr><td><strong>Reusabilidad</strong></td><td>Sus componentes pueden reutilizarse en otros contextos.</td></tr>
+      <tr><td><strong>Portabilidad</strong></td><td>Corre en distintos ambientes (hardware, SO).</td></tr>
+      <tr><td><strong>Interoperabilidad</strong></td><td>Convive y coopera con otros sistemas.</td></tr>
+      <tr><td><strong>Productividad</strong></td><td>Cantidad de recursos para producir el software.</td></tr>
+      <tr><td><strong>Oportunidad</strong></td><td>Capacidad de entregar a tiempo.</td></tr>
+      <tr><td><strong>Visibilidad</strong></td><td>El estado del proyecto está documentado y accesible.</td></tr>
+      <tr><td><strong>Integridad</strong></td><td>Controla accesos no autorizados.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Principios de la ingeniería de software</h2>
+  <details><summary>Rigor y formalidad</summary><p>Complemento a la creatividad. El nivel máximo es la formalidad matemática.</p></details>
+  <details><summary>Separación de incumbencias</summary><p>Dividir el problema en aspectos manejables por separado (equipos de dev, testing, redes).</p></details>
+  <details><summary>Modularidad</summary><p>Dividir el sistema en módulos con <strong>alta cohesión</strong> (cada módulo hace una cosa bien) y <strong>bajo acoplamiento</strong> (los módulos dependen poco entre sí).</p></details>
+  <details><summary>Abstracción</summary><p>Identificar lo importante e ignorar lo irrelevante.</p></details>
+  <details><summary>Anticipación al cambio</summary><p>Prever que el software se va a actualizar. Las herramientas de control de versiones ayudan.</p></details>
+  <details><summary>Generalización</summary><p>Buscar el problema más general detrás del problema puntual.</p></details>
+  <details><summary>Incrementalidad</summary><p>Entregar subconjuntos funcionales para feedback temprano.</p></details>
+
+  <h2>Esencia y accidente — Brooks, "No Silver Bullet"</h2>
+  <pre class="mermaid">
+flowchart TD
+    B[Dificultades del software]
+    B --> E[Esenciales<br/>no desaparecen]
+    B --> A[Accidentales<br/>se resuelven con tecnología]
+    E --> E1[Complejidad]
+    E --> E2[Conformidad]
+    E --> E3[Variabilidad]
+    E --> E4[Invisibilidad]
+    A --> A1[Lenguajes limitados]
+    A --> A2[Poca memoria]
+    A --> A3[Herramientas débiles]
+  </pre>
+  <blockquote>No hay bala de plata — no existe una técnica o herramienta que sola resuelva la esencia del software.</blockquote>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">¿Qué pasó en 1968?</div>
+      <div class="flashcard-back">Conferencia OTAN: nacen "crisis del software" e "ingeniería del software".</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Modularidad = ?</div>
+      <div class="flashcard-back">Alta cohesión + bajo acoplamiento.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">4 dificultades esenciales (Brooks)</div>
+      <div class="flashcard-back">Complejidad, conformidad, variabilidad, invisibilidad.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Producto de software</div>
+      <div class="flashcard-back">Código + docs + diseño + pruebas + manuales. No solo el .exe.</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. ¿Quién definió la ingeniería de software como "establecimiento y uso de principios de ingeniería para obtener software económico"?</div>
+      <div class="opts">
+        <div class="opt" data-correct="1">Fritz Bauer (1968)</div>
+        <div class="opt">IEEE (1993)</div>
+        <div class="opt">Barry Boehm</div>
+        <div class="opt">Frederick Brooks</div>
+      </div>
+      <div class="explain">Bauer fue el primero, en la conferencia OTAN de 1968.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. ¿Cuáles son las 4 dificultades <em>esenciales</em> según Brooks?</div>
+      <div class="opts">
+        <div class="opt">Memoria, CPU, lenguaje, red</div>
+        <div class="opt" data-correct="1">Complejidad, conformidad, variabilidad, invisibilidad</div>
+        <div class="opt">Rigor, modularidad, abstracción, cambio</div>
+        <div class="opt">Correctitud, robustez, performance, portabilidad</div>
+      </div>
+      <div class="explain">Las esenciales no desaparecen con avances tecnológicos — son inherentes al software.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. Alta cohesión y bajo acoplamiento son principios de...</div>
+      <div class="opts">
+        <div class="opt">Abstracción</div>
+        <div class="opt">Generalización</div>
+        <div class="opt" data-correct="1">Modularidad</div>
+        <div class="opt">Incrementalidad</div>
+      </div>
+      <div class="explain">Un módulo bien diseñado hace una sola cosa (cohesión) y depende poco de otros (acoplamiento).</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li>Las <strong>3 definiciones</strong>: Bauer, IEEE, Boehm.</li>
+      <li><strong>Producto</strong> ≠ solo ejecutable — incluye toda la documentación.</li>
+      <li>Cualidades <strong>internas vs. externas</strong> (Ghezzi).</li>
+      <li><strong>Modularidad</strong>: alta cohesión, bajo acoplamiento.</li>
+      <li><strong>Esencia vs. accidente</strong> (Brooks): las esenciales nunca desaparecen.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="index.html"><span class="label">◄ Volver</span><span class="title">Índice</span></a>
+    <a href="02-ciclos-de-vida.html" class="next"><span class="label">Siguiente ►</span><span class="title">02 · Ciclos de vida</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { darkMode: true, background: '#1c2128', primaryColor: '#1f6feb', primaryTextColor: '#e6edf3', lineColor: '#58a6ff' } });</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 · Procesos de negocio — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>05 · Procesos de negocio</strong></span>
+  <span class="nav-links"><a href="04-extraccion-requerimientos.html">◄ Anterior</a> <a href="index.html">Índice</a> <a href="06-requerimientos.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 05</span>
+    <h1>Modelado de procesos de negocio</h1>
+    <p class="sub">Modelos, diagrama de actividad UML, BPM y BPMN 2.0 — el lenguaje común entre negocio y desarrollo.</p>
+  </div>
+
+  <h2>¿Por qué modelamos?</h2>
+  <p>Un <strong>modelo</strong> es una representación de la realidad. Se construye usando abstracción: resaltar lo importante, minimizar lo irrelevante.</p>
+  <blockquote>Alan Davis: "Un modelo responde a un conjunto bien definido de preguntas sobre la realidad modelada, con una tolerancia adecuada para el propósito."</blockquote>
+  <div class="grid">
+    <div class="card"><p>No es la realidad, la representa.</p></div>
+    <div class="card"><p>Respeta una forma de construcción definida.</p></div>
+    <div class="card"><p>Muestra o predice características.</p></div>
+    <div class="card"><p>Más económico que la realidad misma.</p></div>
+  </div>
+  <div class="card accent"><strong>Beneficio clave:</strong> detectar errores <strong>temprano</strong> y ajustar antes de construir.</div>
+
+  <h2>Ejemplos de modelos</h2>
+  <div class="grid">
+    <div class="card">📊 Organigrama</div>
+    <div class="card">🔀 Diagrama de proceso</div>
+    <div class="card">📈 Gráfico estadístico</div>
+    <div class="card">🧩 Diagrama de clases UML</div>
+    <div class="card">🏛️ Plano arquitectónico</div>
+    <div class="card">🏠 Plano de planta</div>
+  </div>
+
+  <h2>Diagrama de actividad (UML)</h2>
+  <p>Útil para comprender el <strong>comportamiento de alto nivel</strong>. Parecido a un diagrama de flujo, pero con <strong>paralelismo</strong>.</p>
+  <h3>Elementos principales</h3>
+  <table>
+    <thead><tr><th>Elemento</th><th>Símbolo</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Estado inicial</strong></td><td>● Círculo sólido</td><td>Punto de inicio del flujo</td></tr>
+      <tr><td><strong>Estado final</strong></td><td>◉ Círculo con punto</td><td>Fin del flujo</td></tr>
+      <tr><td><strong>Actividad</strong></td><td>▭ Caja redondeada</td><td>Acción que genera cambio o retorna valor</td></tr>
+      <tr><td><strong>Transición</strong></td><td>→ Flecha</td><td>Salida/entrada, puede tener guarda <code>[condición]</code></td></tr>
+      <tr><td><strong>Decisión</strong></td><td>◆ Rombo</td><td>Flujos alternativos (1+ entradas, 2+ salidas excluyentes)</td></tr>
+      <tr><td><strong>Barra de sincronización</strong></td><td>━ Línea gruesa</td><td><strong>Split</strong> (paralelo) / <strong>Merge</strong> (espera)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ejemplo: consulta de cursos con carriles</h3>
+  <pre class="mermaid">
+flowchart TD
+    start((●)) --> A[Interesado consulta]
+    A --> F{{fork}}
+    F --> B[Verificar cursos disponibles]
+    F --> C[Verificar horarios]
+    B --> J{{join}}
+    C --> J
+    J --> D[Entregar info al interesado]
+    D --> E(((◉)))
+  </pre>
+  <div class="card accent">Los <strong>carriles</strong> (swimlanes) dividen en columnas — cada columna = un responsable.</div>
+
+  <h3>Pros y contras</h3>
+  <div class="grid">
+    <div class="card ok"><h3 style="margin-top:0">✅ Ventaja</h3><p>Permite modelar procesamiento <strong>paralelo</strong> (workflows, multi-thread).</p></div>
+    <div class="card err"><h3 style="margin-top:0">❌ Desventaja</h3><p>No muestra claramente los vínculos entre acciones y objetos → mejor el diagrama de secuencia.</p></div>
+  </div>
+
+  <h2>BPM — Business Process Management</h2>
+  <blockquote>ABPMP: "BPM es un enfoque sistemático para identificar, levantar, documentar, diseñar, ejecutar, medir y controlar tanto los procesos manuales como automatizados, con la finalidad de lograr los objetivos de negocio alineados con la estrategia de la organización."</blockquote>
+  <div class="grid">
+    <div class="card"><p>👥 Expertos de negocio modelan. IT provee infraestructura.</p></div>
+    <div class="card"><p>🔄 Separa lógica del proceso de otras reglas → absorbe cambios.</p></div>
+    <div class="card"><p>💰 Reduce costos con lenguajes gráficos de alto nivel.</p></div>
+  </div>
+
+  <h2>BPMN 2.0 — Business Process Model and Notation</h2>
+  <div class="timeline">
+    <div class="timeline-item"><span class="date">2004</span><p>Primera versión, por el Object Management Group (OMG).</p></div>
+    <div class="timeline-item"><span class="date">2009</span><p><strong>BPMN 2.0</strong> — versión vigente.</p></div>
+  </div>
+  <div class="card accent"><strong>Objetivo:</strong> notación gráfica que entiendan tanto profesionales de negocio como ingenieros de software.</div>
+
+  <h3>Las 4 categorías de elementos</h3>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">🔸 Elementos de flujo</h3><p>Eventos, actividades, gateways (control del flujo).</p></div>
+    <div class="card"><h3 style="margin-top:0">🔗 Elementos de conexión</h3><p>Flujo de secuencia, flujo de mensaje, asociación.</p></div>
+    <div class="card"><h3 style="margin-top:0">🏊 Contenedores</h3><p>Pool, lane (swimlanes).</p></div>
+    <div class="card"><h3 style="margin-top:0">📦 Artefactos</h3><p>Objetos de datos, grupos, anotaciones.</p></div>
+  </div>
+
+  <h3>Ejemplo BPMN: inscripción a un curso</h3>
+  <pre class="mermaid">
+flowchart LR
+    subgraph Alumno
+    A1((Solicita inscripción)) --> A2[Enviar solicitud]
+    end
+    subgraph Sector de informes
+    A2 --> S1{¿Hay cupo?}
+    S1 -- No --> S2[Informar rechazo]
+    S1 -- Sí --> S3[Registrar inscripción]
+    S3 --> S4[Emitir comprobante]
+    end
+    S2 --> F((Fin))
+    S4 --> F
+  </pre>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Diferencia clave: actividad vs. flujo</div>
+      <div class="flashcard-back">El diagrama de actividad permite paralelismo.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Swimlanes</div>
+      <div class="flashcard-back">Columnas por responsable.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Split vs. Merge</div>
+      <div class="flashcard-back">Split: dividir en paralelo. Merge: esperar que todos lleguen.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Versión vigente BPMN</div>
+      <div class="flashcard-back">2.0 (2009, OMG).</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. Principal ventaja del diagrama de actividad UML sobre el diagrama de flujo...</div>
+      <div class="opts">
+        <div class="opt">Es más lindo</div>
+        <div class="opt" data-correct="1">Permite modelar procesamiento paralelo</div>
+        <div class="opt">Usa colores</div>
+        <div class="opt">No necesita carriles</div>
+      </div>
+      <div class="explain">La barra de sincronización (split/merge) modela paralelismo real.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. ¿Quién mantiene BPMN?</div>
+      <div class="opts">
+        <div class="opt">IEEE</div>
+        <div class="opt">ISO</div>
+        <div class="opt" data-correct="1">OMG (Object Management Group)</div>
+        <div class="opt">W3C</div>
+      </div>
+      <div class="explain">El mismo grupo detrás de UML.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. Un rombo en un diagrama de actividad representa...</div>
+      <div class="opts">
+        <div class="opt">Actividad</div>
+        <div class="opt">Estado inicial</div>
+        <div class="opt" data-correct="1">Decisión</div>
+        <div class="opt">Transición</div>
+      </div>
+      <div class="explain">Rombo = decisión. Dos o más salidas excluyentes.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>Modelo</strong>: representación de la realidad. Detecta errores temprano.</li>
+      <li><strong>Diagrama de actividad</strong>: diferencia clave → <strong>paralelismo</strong>.</li>
+      <li><strong>BPM</strong>: gestión de procesos. Expertos de negocio + IT.</li>
+      <li><strong>BPMN 2.0</strong>: 4 categorías de elementos. Simple para todos.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="04-extraccion-requerimientos.html"><span class="label">◄ Anterior</span><span class="title">04 · Extracción de requerimientos</span></a>
+    <a href="06-requerimientos.html" class="next"><span class="label">Siguiente ►</span><span class="title">06 · Requerimientos</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</body>
+</html>

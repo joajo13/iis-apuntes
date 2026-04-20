@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 · Extracción de requerimientos — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>04 · Extracción de requerimientos</strong></span>
+  <span class="nav-links"><a href="03-metodologias-agiles.html">◄ Anterior</a> <a href="index.html">Índice</a> <a href="05-procesos-de-negocio.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 04</span>
+    <h1>Extracción de requerimientos</h1>
+    <p class="sub">Cómo sacar información útil del cliente sin volverte loco — entrevista, cuestionario y observación directa.</p>
+  </div>
+
+  <h2>Las 3 técnicas básicas</h2>
+  <div class="grid">
+    <div class="card accent"><h3 style="margin-top:0">🎤 Entrevista</h3><p>Conversación dirigida con propósito específico.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">📋 Cuestionario</h3><p>Preguntas escritas para recoger opiniones y datos.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">👀 Observación directa</h3><p>Visita presencial para ver cómo se trabaja.</p></div>
+  </div>
+
+  <h2>La entrevista — planificación en 5 pasos</h2>
+  <div class="timeline">
+    <div class="timeline-item"><span class="date">Paso 1</span><p><strong>Lectura de antecedentes.</strong> Investigar la organización y al entrevistado. Familiarizarse con el vocabulario del negocio.</p></div>
+    <div class="timeline-item"><span class="date">Paso 2</span><p><strong>Determinar objetivos.</strong> 4–6 puntos principales a cubrir.</p></div>
+    <div class="timeline-item"><span class="date">Paso 3</span><p><strong>Seleccionar a quién entrevistar.</strong> Personas de todos los niveles involucrados.</p></div>
+    <div class="timeline-item"><span class="date">Paso 4</span><p><strong>Preparar al entrevistado.</strong> Avisarle con anticipación. Duración máxima: 45 min a 1 h.</p></div>
+    <div class="timeline-item"><span class="date">Paso 5</span><p><strong>Determinar tipo y estructura</strong> de preguntas.</p></div>
+  </div>
+
+  <h2>Tipos de preguntas</h2>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="a">Abiertas</button>
+      <button class="tab-btn" data-tab="c">Cerradas</button>
+      <button class="tab-btn" data-tab="s">De sondeo</button>
+    </div>
+    <div class="tab-panel active" data-tab="a">
+      <div class="card"><p><strong>Característica:</strong> el entrevistado se explaya libremente.</p><p><strong>Cuándo usar:</strong> para obtener riqueza de detalle y vocabulario del negocio.</p><p><em>Ej: "¿Cómo es un día típico de trabajo en tu sector?"</em></p></div>
+    </div>
+    <div class="tab-panel" data-tab="c">
+      <div class="card"><p><strong>Característica:</strong> respuesta acotada (sí/no, número).</p><p><strong>Cuándo usar:</strong> para obtener datos concretos rápido.</p><p><em>Ej: "¿Cuántas solicitudes procesan por día?"</em></p></div>
+    </div>
+    <div class="tab-panel" data-tab="s">
+      <div class="card"><p><strong>Característica:</strong> amplían o clarifican una respuesta.</p><p><strong>Cuándo usar:</strong> para profundizar.</p><p><em>Ej: "¿Por qué? ¿Puede dar un ejemplo?"</em></p></div>
+    </div>
+  </div>
+
+  <h2>Estructuras de la entrevista</h2>
+  <pre class="mermaid">
+flowchart TD
+    subgraph Piramidal
+    direction TB
+    C1[Cerradas] --> A1[Abiertas]
+    end
+    subgraph Embudo
+    direction TB
+    A2[Abiertas] --> C2[Cerradas]
+    end
+    subgraph Diamante
+    direction TB
+    C3[Cerradas] --> A3[Abiertas] --> C4[Cerradas]
+    end
+  </pre>
+  <table>
+    <thead><tr><th>Estructura</th><th>De → a</th><th>Cuándo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Piramidal</strong> (inductiva)</td><td>Cerradas → abiertas</td><td>Entrevistados poco participativos</td></tr>
+      <tr><td><strong>Embudo</strong> (deductiva)</td><td>Abiertas → cerradas</td><td>Entrevistados que necesitan expresarse</td></tr>
+      <tr><td><strong>Diamante</strong></td><td>Cerradas → abiertas → cerradas</td><td>La más completa</td></tr>
+    </tbody>
+  </table>
+  <div class="card warn"><strong>Registro:</strong> grabación (libera al entrevistador) o notas. Si el entrevistado se pone nervioso con la grabación, mejor notas.</div>
+
+  <h2>Cuestionarios</h2>
+  <p>Permiten llegar a muchas personas a la vez. Útiles para:</p>
+  <ul>
+    <li>Entrevistar personas en distintas ubicaciones.</li>
+    <li>Sondear opiniones cuando hay demasiada gente.</li>
+    <li>Estudio exploratorio previo al proyecto.</li>
+  </ul>
+  <div class="card accent">
+    <h3 style="margin-top:0">Tips al redactar</h3>
+    <ul>
+      <li>Vocabulario del destinatario.</li>
+      <li>Preguntas cortas y específicas.</li>
+      <li>Las importantes <strong>primero</strong>, las controversiales <strong>al final</strong>.</li>
+    </ul>
+  </div>
+
+  <h2>Observación directa</h2>
+  <p>Visita presencial para ver cómo trabajan los sectores afectados. Permite detectar:</p>
+  <div class="grid">
+    <div class="card"><p>📝 <strong>Procedimientos informales</strong> no documentados en ningún lado.</p></div>
+    <div class="card"><p>🤔 <strong>Por qué</strong> se hacen las cosas de cierta manera.</p></div>
+    <div class="card"><p>🔗 <strong>Relaciones</strong> entre tomadores de decisiones.</p></div>
+    <div class="card"><p>🛠️ <strong>Elementos físicos</strong> que facilitan la tarea.</p></div>
+  </div>
+
+  <h2>Errores comunes a evitar</h2>
+  <div class="grid">
+    <div class="card err">
+      <h3 style="margin-top:0">❌ Preguntas tendenciosas</h3>
+      <p>Mostrar la propia opinión limita al entrevistado.</p>
+      <p><em>"¿Qué opina de este obsoleto método de trabajo?"</em></p>
+    </div>
+    <div class="card err">
+      <h3 style="margin-top:0">❌ Preguntas dobles</h3>
+      <p>Dos preguntas en una → el entrevistado responde una sola y la otra queda en el aire.</p>
+      <p><em>"¿Usa el sistema y cómo lo evalúa?"</em></p>
+    </div>
+  </div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">3 técnicas de extracción</div>
+      <div class="flashcard-back">Entrevista, cuestionario, observación directa.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Estructura piramidal</div>
+      <div class="flashcard-back">Inductiva: de cerradas a abiertas.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Estructura embudo</div>
+      <div class="flashcard-back">Deductiva: de abiertas a cerradas.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">¿Para qué sirve la observación directa?</div>
+      <div class="flashcard-back">Detectar procedimientos informales y relaciones ocultas.</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. "¿Cuál es su horario habitual?" es una pregunta...</div>
+      <div class="opts">
+        <div class="opt">Abierta</div>
+        <div class="opt" data-correct="1">Cerrada</div>
+        <div class="opt">De sondeo</div>
+        <div class="opt">Tendenciosa</div>
+      </div>
+      <div class="explain">Respuesta acotada → cerrada.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. La estructura <strong>diamante</strong> combina...</div>
+      <div class="opts">
+        <div class="opt">Abiertas → abiertas → cerradas</div>
+        <div class="opt" data-correct="1">Cerradas → abiertas → cerradas</div>
+        <div class="opt">Sondeo → abiertas → cerradas</div>
+        <div class="opt">Solo abiertas</div>
+      </div>
+      <div class="explain">Abre con cerradas, amplía con abiertas y cierra con cerradas — la más completa.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. "¿Qué opina del obsoleto método actual?" es un error de tipo...</div>
+      <div class="opts">
+        <div class="opt">Pregunta doble</div>
+        <div class="opt" data-correct="1">Pregunta tendenciosa</div>
+        <div class="opt">Pregunta cerrada</div>
+        <div class="opt">Pregunta de sondeo</div>
+      </div>
+      <div class="explain">La palabra "obsoleto" revela la opinión del entrevistador y sesga la respuesta.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>3 técnicas</strong>: entrevista, cuestionario, observación directa.</li>
+      <li><strong>Preguntas</strong>: abiertas, cerradas, de sondeo.</li>
+      <li><strong>Estructuras</strong>: piramidal (inductiva), embudo (deductiva), diamante (combinación).</li>
+      <li><strong>Observación directa</strong>: detecta procedimientos informales y relaciones no visibles.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="03-metodologias-agiles.html"><span class="label">◄ Anterior</span><span class="title">03 · Metodologías ágiles</span></a>
+    <a href="05-procesos-de-negocio.html" class="next"><span class="label">Siguiente ►</span><span class="title">05 · Procesos de negocio</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</body>
+</html>

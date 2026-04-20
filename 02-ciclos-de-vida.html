@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 · Ciclos de vida — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>02 · Ciclos de vida</strong></span>
+  <span class="nav-links"><a href="01-introduccion.html">◄ Anterior</a> <a href="index.html">Índice</a> <a href="03-metodologias-agiles.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 02</span>
+    <h1>Modelos de ciclos de vida</h1>
+    <p class="sub">Cascada, espiral, incremental, prototipos, evolutivo y RUP. El modelo que elegís define el destino del proyecto.</p>
+  </div>
+
+  <h2>¿Qué es el ciclo de vida?</h2>
+  <p>Abarca desde que surge la necesidad inicial hasta que el sistema sale de uso. El modelo define <strong>orden</strong> y <strong>forma</strong> de las tareas: especificación, prototipado, diseño, prueba, implementación.</p>
+  <div class="card accent">La elección afecta <strong>productividad, calidad, riesgo</strong> y relación con el cliente.</div>
+
+  <h2>1 · Cascada (ciclo de vida clásico)</h2>
+  <p>El modelo más viejo, pero todavía se usa. Etapas <strong>secuenciales</strong>: cada una debe estar 100% terminada antes de empezar la siguiente.</p>
+  <pre class="mermaid">
+flowchart TD
+    A[Análisis y especificación<br/>de requerimientos] --> B[Diseño]
+    B --> C[Codificación]
+    C --> D[Pruebas]
+    D --> E[Integración]
+    E --> F[Operación y mantenimiento]
+    F -.retorno modificado.-> A
+  </pre>
+  <div class="grid">
+    <div class="card ok">
+      <h3 style="margin-top:0">✅ Ventajas</h3>
+      <ul><li>Simple de administrar</li><li>Todo el equipo en la misma etapa</li><li>Permite cronogramar bien</li></ul>
+    </div>
+    <div class="card err">
+      <h3 style="margin-top:0">❌ Desventajas</h3>
+      <ul><li>Rígido</li><li>Cliente no ve avances hasta pruebas</li><li>Cambios difíciles de incorporar</li></ul>
+    </div>
+  </div>
+  <blockquote>Ideal cuando los requisitos están completamente definidos y no se esperan cambios.</blockquote>
+
+  <h2>2 · Espiral (Barry Boehm, años 80)</h2>
+  <p>Gran aporte: incorpora <strong>análisis de riesgos</strong> al ciclo de vida. El proyecto es una suma de mini-proyectos.</p>
+  <pre class="mermaid">
+flowchart LR
+    P[1 · Planificación<br/>objetivos, alternativas] --> R[2 · Análisis de riesgos<br/>evaluar, prevenir]
+    R --> I[3 · Ingeniería<br/>desarrollo del producto]
+    I --> E[4 · Evaluación del cliente<br/>¿seguimos?]
+    E --> P
+  </pre>
+  <div class="card accent">Cada vuelta cubre las 4 actividades y genera un incremento del producto.</div>
+
+  <h2>3 · Incremental</h2>
+  <p>Le suma flexibilidad a cascada. Soluciona su mayor problema: el cliente no veía nada.</p>
+  <ol>
+    <li>Especificar requerimientos <strong>una vez</strong>.</li>
+    <li>Descomponer en <strong>partes operativas</strong>.</li>
+    <li>Entregar cada parte al cliente mientras se sigue el resto.</li>
+  </ol>
+  <pre class="mermaid">
+gantt
+    title Entregas incrementales solapadas
+    dateFormat X
+    axisFormat %s
+    section Incremento 1
+    Análisis : 0, 2
+    Diseño   : 2, 4
+    Código   : 4, 6
+    Entrega  : 6, 7
+    section Incremento 2
+    Análisis : 3, 5
+    Diseño   : 5, 7
+    Código   : 7, 9
+    Entrega  : 9, 10
+    section Incremento 3
+    Análisis : 6, 8
+    Diseño   : 8, 10
+    Código   : 10, 12
+    Entrega  : 12, 13
+  </pre>
+  <div class="card ok"><strong>Variante: Diseño por planificación.</strong> Las entregas se ordenan por prioridad del cliente. Si se cancela, lo importante ya está hecho.</div>
+
+  <h2>4 · Prototipos</h2>
+  <p>Un <strong>prototipo</strong> simula el funcionamiento del sistema. Útil cuando el cliente no sabe qué quiere o el desarrollador no conoce el negocio.</p>
+  <div class="grid">
+    <div class="card">
+      <h3 style="margin-top:0">✏️ Ligeros</h3>
+      <p>Bocetos de pantallas con dibujos de navegación.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">⚙️ Operativos</h3>
+      <p>Módulos funcionales que cubren partes de los requerimientos.</p>
+    </div>
+  </div>
+  <p>Evolución: el prototipo era <strong>descartable</strong> (borrador) → el cliente no entendía por qué se tiraba → pasaron a ser <strong>evolutivos</strong> (se refinan, no se descartan).</p>
+
+  <h2>5 · Evolutivo</h2>
+  <p>Ciclos que enlazan especificación, desarrollo y validación. Cada ciclo genera un sistema completo.</p>
+  <pre class="mermaid">
+flowchart LR
+    S[Sistema inicial<br/>rápido] --> U[Uso del cliente]
+    U --> F[Feedback]
+    F --> C[Ciclo 2]
+    C --> U2[Uso del cliente]
+    U2 --> F2[Feedback]
+    F2 --> C3[Ciclo 3 ...]
+  </pre>
+  <blockquote>Útil cuando hay desconocimiento, urgencia extrema o entorno cambiante.</blockquote>
+
+  <h2>6 · RUP — Rational Unified Process</h2>
+  <p>Asociado a <strong>UML</strong>. Propuesto por Jacobson, Booch y Rumbaugh. Modelo <strong>iterativo e incremental</strong>.</p>
+  <pre class="mermaid">
+flowchart LR
+    I[1 · Inicio<br/>procesos de negocio<br/>actores] --> E[2 · Elaboración<br/>arquitectura<br/>casos de uso]
+    E --> C[3 · Construcción<br/>diseño, código, pruebas]
+    C --> T[4 · Transición<br/>entorno real]
+  </pre>
+  <table>
+    <thead><tr><th>Fase</th><th>Entregable clave</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Inicio</strong></td><td>Procesos de negocio, actores e interacciones</td></tr>
+      <tr><td><strong>Elaboración</strong></td><td>Modelo de requerimientos (casos de uso) + arquitectura</td></tr>
+      <tr><td><strong>Construcción</strong></td><td>Sistema operativo documentado</td></tr>
+      <tr><td><strong>Transición</strong></td><td>Sistema funcionando en producción</td></tr>
+    </tbody>
+  </table>
+  <div class="card accent">Cada fase tiene <strong>iteraciones</strong>. Cada iteración pasa por los flujos de trabajo: requisitos, análisis, diseño, implementación y pruebas.</div>
+
+  <h2>Comparador rápido</h2>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="req">Estabilidad de requisitos</button>
+      <button class="tab-btn" data-tab="risk">Manejo de riesgos</button>
+      <button class="tab-btn" data-tab="cli">Visibilidad cliente</button>
+    </div>
+    <div class="tab-panel active" data-tab="req">
+      <table><tbody>
+        <tr><td>Cascada</td><td>🟢 Alta — requisitos cerrados</td></tr>
+        <tr><td>Espiral</td><td>🟡 Media</td></tr>
+        <tr><td>Incremental</td><td>🟡 Media</td></tr>
+        <tr><td>Evolutivo</td><td>🔴 Baja — requisitos cambian</td></tr>
+        <tr><td>RUP</td><td>🟡 Media-alta</td></tr>
+      </tbody></table>
+    </div>
+    <div class="tab-panel" data-tab="risk">
+      <table><tbody>
+        <tr><td>Cascada</td><td>🔴 No lo aborda</td></tr>
+        <tr><td>Espiral</td><td>🟢 Foco central</td></tr>
+        <tr><td>Incremental</td><td>🟡 Medio</td></tr>
+        <tr><td>RUP</td><td>🟢 En elaboración</td></tr>
+      </tbody></table>
+    </div>
+    <div class="tab-panel" data-tab="cli">
+      <table><tbody>
+        <tr><td>Cascada</td><td>🔴 Solo al final</td></tr>
+        <tr><td>Espiral</td><td>🟢 Cada vuelta</td></tr>
+        <tr><td>Incremental</td><td>🟢 Cada entrega</td></tr>
+        <tr><td>Evolutivo</td><td>🟢 Continua</td></tr>
+        <tr><td>RUP</td><td>🟢 Cada iteración</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <h2>Criterios para elegir modelo</h2>
+  <div class="grid">
+    <div class="card"><p>¿Se puede descomponer en subsistemas?</p></div>
+    <div class="card"><p>¿Qué tan estables son los requisitos?</p></div>
+    <div class="card"><p>¿Qué tan urgentes son plazos y presupuesto?</p></div>
+    <div class="card"><p>¿Cuánto riesgo tiene el proyecto?</p></div>
+    <div class="card"><p>¿Con qué frecuencia ve avances el cliente?</p></div>
+  </div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Cascada en una palabra</div>
+      <div class="flashcard-back">Rígido. Etapas secuenciales.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Aporte único del espiral</div>
+      <div class="flashcard-back">Análisis de riesgos.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Fases de RUP</div>
+      <div class="flashcard-back">Inicio, Elaboración, Construcción, Transición.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Descartable → ?</div>
+      <div class="flashcard-back">Prototipo evolutivo (se refina, no se tira).</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. ¿Qué modelo incorpora explícitamente el análisis de riesgos?</div>
+      <div class="opts">
+        <div class="opt">Cascada</div>
+        <div class="opt" data-correct="1">Espiral</div>
+        <div class="opt">Incremental</div>
+        <div class="opt">Prototipos</div>
+      </div>
+      <div class="explain">Boehm introdujo el análisis de riesgos como cuadrante propio del espiral.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. RUP se define como...</div>
+      <div class="opts">
+        <div class="opt">Secuencial puro</div>
+        <div class="opt">Ágil</div>
+        <div class="opt" data-correct="1">Iterativo e incremental</div>
+        <div class="opt">Descartable</div>
+      </div>
+      <div class="explain">RUP es un híbrido iterativo + incremental asociado a UML.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. ¿Cuál es la fase de RUP donde el sistema pasa al entorno real?</div>
+      <div class="opts">
+        <div class="opt">Inicio</div>
+        <div class="opt">Elaboración</div>
+        <div class="opt">Construcción</div>
+        <div class="opt" data-correct="1">Transición</div>
+      </div>
+      <div class="explain">Transición termina cuando el sistema funciona correctamente en producción.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>Cascada</strong>: rígido, secuencial, bueno si los requisitos son estables.</li>
+      <li><strong>Espiral</strong>: análisis de riesgos. Proyecto = suma de mini-proyectos.</li>
+      <li><strong>Incremental</strong>: entregas parciales operativas.</li>
+      <li><strong>Prototipos</strong>: para definir requisitos con el cliente. No es el producto final.</li>
+      <li><strong>RUP</strong>: 4 fases + flujos de trabajo. Iterativo e incremental. UML.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="01-introduccion.html"><span class="label">◄ Anterior</span><span class="title">01 · Introducción</span></a>
+    <a href="03-metodologias-agiles.html" class="next"><span class="label">Siguiente ►</span><span class="title">03 · Metodologías ágiles</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</body>
+</html>

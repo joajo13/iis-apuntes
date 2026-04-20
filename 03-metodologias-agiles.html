@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 · Metodologías ágiles — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>03 · Metodologías ágiles</strong></span>
+  <span class="nav-links"><a href="02-ciclos-de-vida.html">◄ Anterior</a> <a href="index.html">Índice</a> <a href="04-extraccion-requerimientos.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 03</span>
+    <h1>Metodologías ágiles</h1>
+    <p class="sub">Manifiesto Ágil, XP y Scrum — cómo trabajar cuando los requisitos cambian todo el tiempo.</p>
+  </div>
+
+  <h2>Por qué surgieron</h2>
+  <p>Los modelos tradicionales (cascada, evolutivo) servían para proyectos grandes con muchos recursos. En proyectos chicos era ridículo: más tiempo planificando que programando.</p>
+  <div class="timeline">
+    <div class="timeline-item"><span class="date">1990s</span><p>Kent Beck publica <em>Extreme Programming Explained</em>.</p></div>
+    <div class="timeline-item"><span class="date">2001</span><p>17 críticos de los modelos tradicionales firman el <strong>Manifiesto Ágil</strong>.</p></div>
+  </div>
+
+  <h2>Manifiesto Ágil — 5 principios</h2>
+  <div class="grid">
+    <div class="card accent"><h3 style="margin-top:0">1 · Cliente</h3><p>Participación activa en el proceso.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">2 · Incrementos</h3><p>El software crece en iteraciones.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">3 · Personas</h3><p>Personas por sobre procesos.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">4 · Cambio</h3><p>Aceptar que los requerimientos cambian.</p></div>
+    <div class="card accent"><h3 style="margin-top:0">5 · Simplicidad</h3><p>En el producto y en el proceso.</p></div>
+  </div>
+
+  <h2>XP — Extreme Programming (Kent Beck)</h2>
+  <p>Cuatro prácticas básicas:</p>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">🚀 Liberación limitada</h3><p>Entregar rápido aunque no esté completo, si el cliente lo necesita.</p></div>
+    <div class="card"><h3 style="margin-top:0">⏰ 40 horas/semana</h3><p>Sin horas extra — evita el agotamiento.</p></div>
+    <div class="card"><h3 style="margin-top:0">🏢 Cliente en el sitio</h3><p>Involucrado todo el tiempo.</p></div>
+    <div class="card"><h3 style="margin-top:0">👥 Programación en pares</h3><p>Dos programadores trabajando juntos.</p></div>
+  </div>
+  <p>El cliente describe sus necesidades como <strong>historias de usuario</strong> (no lista de features). Ciclo:</p>
+  <pre class="mermaid">
+flowchart LR
+    H[1 · Seleccionar<br/>historias] --> T[2 · Dividir<br/>en tareas]
+    T --> P[3 · Planificar<br/>entrega]
+    P --> D[4 · Desarrollar<br/>integrar, probar]
+    D --> E[5 · Entregar]
+    E --> V[6 · Evaluación<br/>del cliente]
+    V --> H
+  </pre>
+
+  <h2>Scrum</h2>
+  <p>Foco: agregar valor al negocio en el <strong>menor tiempo posible</strong>. El proyecto avanza en <strong>sprints</strong> (1–4 semanas).</p>
+  <pre class="mermaid">
+flowchart LR
+    PB[Product Backlog<br/>requisitos priorizados] --> SP[Sprint Planning]
+    SP --> SB[Sprint Backlog]
+    SB --> S[Sprint<br/>1-4 semanas]
+    S --> DM[Daily Meeting]
+    DM --> S
+    S --> D[Demo / Review]
+    D --> R[Retrospectiva]
+    R --> PB
+  </pre>
+  <div class="card err"><strong>Regla de oro:</strong> durante el sprint, <strong>equipo, calidad y alcance son inalterables</strong>.</div>
+
+  <h3>Los 3 roles</h3>
+  <table>
+    <thead><tr><th>Rol</th><th>Responsabilidad</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Product Owner</strong></td><td>Administra el product backlog, define prioridades. Sus decisiones deben respetarse.</td></tr>
+      <tr><td><strong>Equipo</strong></td><td>Construye el producto. Multidisciplinario, autogestionado, sin jerarquías. Tamaño ideal: <strong>7 ± 2</strong>.</td></tr>
+      <tr><td><strong>Scrum Master</strong></td><td>Facilita, hace coaching, elimina impedimentos. <strong>NO es el jefe del equipo</strong>.</td></tr>
+    </tbody>
+  </table>
+  <blockquote>Scrum Master y Product Owner <strong>nunca</strong> pueden ser la misma persona.</blockquote>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Año del Manifiesto Ágil</div>
+      <div class="flashcard-back">2001.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Duración de un sprint</div>
+      <div class="flashcard-back">1 a 4 semanas.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Tamaño ideal del equipo Scrum</div>
+      <div class="flashcard-back">7 ± 2 personas.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">En XP el cliente describe con...</div>
+      <div class="flashcard-back">Historias de usuario.</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. ¿Pueden el Scrum Master y el Product Owner ser la misma persona?</div>
+      <div class="opts">
+        <div class="opt">Sí, es común</div>
+        <div class="opt" data-correct="1">Nunca</div>
+        <div class="opt">Solo en equipos chicos</div>
+        <div class="opt">Solo si lo decide el equipo</div>
+      </div>
+      <div class="explain">Los roles son incompatibles: uno prioriza negocio, el otro facilita el proceso.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. Durante un sprint, ¿qué es inalterable?</div>
+      <div class="opts">
+        <div class="opt">Solo el alcance</div>
+        <div class="opt">Solo el equipo</div>
+        <div class="opt" data-correct="1">Equipo, calidad y alcance</div>
+        <div class="opt">Nada, todo puede cambiar</div>
+      </div>
+      <div class="explain">Es uno de los principios básicos de Scrum: blindar el sprint para garantizar el compromiso.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. Una práctica básica de XP es...</div>
+      <div class="opts">
+        <div class="opt" data-correct="1">Programación en pares</div>
+        <div class="opt">Reunión diaria de 15 minutos</div>
+        <div class="opt">Sprints de 2 semanas</div>
+        <div class="opt">Product Backlog</div>
+      </div>
+      <div class="explain">Los otros son de Scrum. XP: liberación limitada, 40h, cliente en sitio, pair programming.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>Manifiesto Ágil</strong>: 5 principios, 2001.</li>
+      <li><strong>XP</strong>: programación en pares, cliente en sitio, historias de usuario.</li>
+      <li><strong>Scrum</strong>: sprints 1–4 semanas, 3 roles (PO, Equipo, SM), backlog priorizado.</li>
+      <li>Scrum Master ≠ jefe. No puede ser el mismo que el PO.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="02-ciclos-de-vida.html"><span class="label">◄ Anterior</span><span class="title">02 · Ciclos de vida</span></a>
+    <a href="04-extraccion-requerimientos.html" class="next"><span class="label">Siguiente ►</span><span class="title">04 · Extracción de requerimientos</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</body>
+</html>

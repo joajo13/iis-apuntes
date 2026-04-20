@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 · Especificación (SRS) — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>07 · Especificación de requerimientos</strong></span>
+  <span class="nav-links"><a href="06-requerimientos.html">◄ Anterior</a> <a href="index.html">Índice</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 07</span>
+    <h1>Especificación de requerimientos (SRS)</h1>
+    <p class="sub">IEEE 830, criterio SMART y los 9 atributos de un buen SRS.</p>
+  </div>
+
+  <h2>¿Qué es el SRS?</h2>
+  <p>El <strong>SRS</strong> (<em>Software Requirements Specification</em>) es la descripción completa del comportamiento externo del software. Especifica <strong>qué hace</strong> el software para un entorno dado. Incluye funcionales y no funcionales.</p>
+  <div class="card accent">Ideal: redactado por desarrollador <strong>y</strong> cliente juntos. Estándar de referencia: <strong>IEEE Std. 830-1998</strong>.</div>
+
+  <div class="grid">
+    <div class="card ok">
+      <h3 style="margin-top:0">✅ Qué DEBE incluir</h3>
+      <ul>
+        <li><strong>Funcionalidad</strong>: qué hace el software.</li>
+        <li><strong>Interfaces externas</strong>: usuarios, hardware, otros sistemas.</li>
+        <li><strong>Rendimiento</strong>: velocidad, tiempos de respuesta.</li>
+        <li><strong>Atributos</strong>: portabilidad, seguridad, exactitud.</li>
+        <li><strong>Restricciones de diseño</strong>: lenguajes, plataformas.</li>
+      </ul>
+    </div>
+    <div class="card err">
+      <h3 style="margin-top:0">❌ Qué NO debe incluir</h3>
+      <ul>
+        <li>Requerimientos del proyecto (costos, cronogramas, fechas).</li>
+        <li>Diseños (audiencia diferente).</li>
+        <li>Planes de aseguramiento de calidad, plan de pruebas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Cuantificación: ¿cuánto hay que hacer?</h2>
+  <p>El mismo sistema con distintos volúmenes lleva a soluciones muy distintas. No es lo mismo 20 autorizaciones por día que 5000 por hora.</p>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="est">Estáticos (capacidad)</button>
+      <button class="tab-btn" data-tab="din">Dinámicos (performance)</button>
+    </div>
+    <div class="tab-panel active" data-tab="est">
+      <ul>
+        <li>Número de terminales.</li>
+        <li>Usuarios simultáneos.</li>
+        <li>Cantidad y tipo de información.</li>
+      </ul>
+    </div>
+    <div class="tab-panel" data-tab="din">
+      <ul>
+        <li>Transacciones por período.</li>
+        <li>Datos procesados en condiciones normales y máximas.</li>
+        <li>Siempre mensurables. <em>Ej: "95% de transacciones en menos de 1 seg."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Ejemplo — tabla de cuantificación</h3>
+  <table>
+    <thead><tr><th>Entidad</th><th>Volumen inicial</th><th>Crecimiento</th><th>Volumen máximo</th><th>Obsolescencia</th></tr></thead>
+    <tbody>
+      <tr><td>Clientes</td><td>150</td><td>25/año</td><td>500</td><td>1 año sin pedidos</td></tr>
+      <tr><td>Autorizaciones</td><td>25</td><td>15/año</td><td>3000</td><td>2 meses de hecha</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Criterio SMART para requerimientos no funcionales</h2>
+  <pre class="mermaid">
+flowchart LR
+    S[S · Specific<br/>Específico] --> M[M · Measurable<br/>Medible]
+    M --> A[A · Attainable<br/>Alcanzable]
+    A --> R[R · Realizable<br/>Realizable]
+    R --> T[T · Traceable<br/>Rastreable]
+  </pre>
+  <table>
+    <thead><tr><th>Letra</th><th>Significa</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><strong>S</strong></td><td>Specific</td><td>Sin ambigüedad, simple y claro.</td></tr>
+      <tr><td><strong>M</strong></td><td>Measurable</td><td>Se puede probar si lo cumple.</td></tr>
+      <tr><td><strong>A</strong></td><td>Attainable</td><td>Factible de llevar a cabo.</td></tr>
+      <tr><td><strong>R</strong></td><td>Realizable</td><td>Se puede cumplir con los recursos.</td></tr>
+      <tr><td><strong>T</strong></td><td>Traceable</td><td>Se puede determinar origen e implementación.</td></tr>
+    </tbody>
+  </table>
+  <div class="card accent">Para validar un RNF, definí <strong>escenarios</strong> con: entrada (estímulo), condiciones (estado), resultados (respuesta + métrica).</div>
+
+  <h2>Los 9 atributos de un buen SRS</h2>
+  <div class="chart-box">
+    <h4>Radar — atributos del SRS</h4>
+    <canvas id="srsRadar" height="120"></canvas>
+  </div>
+  <details open><summary>Correcto</summary><p>Cada requisito representa algo que el sistema realmente debe hacer.</p></details>
+  <details><summary>No ambiguo</summary><p>Cada requerimiento tiene una única interpretación. Los términos multi-significado van en el glosario.</p></details>
+  <details><summary>Completo</summary><p>Todo lo que debe hacer el sistema está ahí. Todas las respuestas posibles definidas. Sin TBDs sin justificación y fecha.</p></details>
+  <details><summary>Verificable</summary><p>Para cada requerimiento existe un proceso concreto y finito para verificarlo. Si no es verificable, eliminar o revisar.</p></details>
+  <details><summary>Consistente</summary><p>Sin conflictos: ni términos, ni características, ni inconsistencias temporales.</p></details>
+  <details><summary>Entendible por no especialistas</summary><p>La notación debe poder ser comprendida por el cliente. Fácil de validar.</p></details>
+  <details><summary>Modificable</summary><p>Estructura del documento permite cambios sin perder consistencia. Requiere índice.</p></details>
+  <details><summary>Rastreable</summary><p>El origen de cada requerimiento es claro. Se sigue su rastro hacia adelante y atrás.</p></details>
+  <details><summary>Anotado</summary><p>Cada requerimiento tiene prioridad (Esencial / Deseable / Opcional) y/o estabilidad.</p></details>
+
+  <h2>Gestión y evolución de requerimientos</h2>
+  <pre class="mermaid">
+flowchart LR
+    E[Especificación<br/>versión N] --> G[Gestión<br/>revisiones regulares]
+    G --> V[Validación<br/>cliente confirma]
+    V --> C{¿Cambios?}
+    C -- Sí --> U[Actualizar SRS<br/>nueva versión]
+    U --> E
+    C -- No --> F[Estable]
+  </pre>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">🔍 Gestión</h3><p>Revisiones regulares con devs y cliente. Formal (docs) o informal (durante producción).</p></div>
+    <div class="card"><h3 style="margin-top:0">✅ Validación</h3><p>La hace el cliente. Confirma que lo especificado coincide con lo que espera.</p></div>
+    <div class="card"><h3 style="margin-top:0">🔄 Evolución</h3><p>Cada cambio actualiza el SRS → nueva versión.</p></div>
+  </div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Estándar del SRS</div>
+      <div class="flashcard-back">IEEE Std. 830-1998.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Qué significa SMART</div>
+      <div class="flashcard-back">Specific, Measurable, Attainable, Realizable, Traceable.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Estático vs. dinámico</div>
+      <div class="flashcard-back">Estático = capacidad. Dinámico = performance.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">¿Qué NO incluye el SRS?</div>
+      <div class="flashcard-back">Costos, cronogramas, diseños, planes de prueba.</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. "El sistema debe ser rápido" viola qué atributos SMART...</div>
+      <div class="opts">
+        <div class="opt">Attainable y Traceable</div>
+        <div class="opt" data-correct="1">Specific y Measurable</div>
+        <div class="opt">Realizable y Traceable</div>
+        <div class="opt">Ninguno</div>
+      </div>
+      <div class="explain">"Rápido" es ambiguo (no específico) y no medible. Debería decir p.ej. "tiempo de respuesta &lt; 1 seg en el 95% de los casos".</div>
+    </div>
+    <div class="q">
+      <div class="question">2. ¿Cuál de estos NO debe incluirse en un SRS?</div>
+      <div class="opts">
+        <div class="opt">Interfaces externas</div>
+        <div class="opt">Restricciones de diseño</div>
+        <div class="opt" data-correct="1">Cronograma del proyecto</div>
+        <div class="opt">Rendimiento</div>
+      </div>
+      <div class="explain">Cronogramas, costos y planes son requerimientos del proyecto, no del software.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. Un SRS <strong>modificable</strong> requiere...</div>
+      <div class="opts">
+        <div class="opt">No tener versiones</div>
+        <div class="opt">Ser escrito en Word</div>
+        <div class="opt" data-correct="1">Tabla de contenidos e índice</div>
+        <div class="opt">Ser rastreable</div>
+      </div>
+      <div class="explain">Estructura que permita cambios sin perder consistencia — índice y TOC son requisito.</div>
+    </div>
+    <div class="q">
+      <div class="question">4. "95% de las transacciones en menos de 1 seg" cumple SMART porque es...</div>
+      <div class="opts">
+        <div class="opt">Ambiguo y genérico</div>
+        <div class="opt" data-correct="1">Específico y medible</div>
+        <div class="opt">Solo rastreable</div>
+        <div class="opt">Solo realizable</div>
+      </div>
+      <div class="explain">Número concreto + umbral verificable = S + M.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>SRS</strong>: qué incluye (funcionalidad, interfaces, rendimiento, atributos, restricciones) y qué NO (costos, cronogramas, planes de prueba).</li>
+      <li><strong>Cuantificación</strong>: estática (capacidad) y dinámica (performance). Siempre mensurables.</li>
+      <li><strong>SMART</strong>: Specific, Measurable, Attainable, Realizable, Traceable.</li>
+      <li><strong>9 atributos</strong>: correcto, no ambiguo, completo, verificable, consistente, entendible, modificable, rastreable, anotado.</li>
+      <li>Los requerimientos <strong>evolucionan</strong> → cada cambio = nueva versión del SRS.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="06-requerimientos.html"><span class="label">◄ Anterior</span><span class="title">06 · Requerimientos</span></a>
+    <a href="index.html" class="next"><span class="label">Fin</span><span class="title">Volver al índice</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+Chart.defaults.color = '#e6edf3';
+Chart.defaults.borderColor = '#30363d';
+new Chart(document.getElementById('srsRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['Correcto','No ambiguo','Completo','Verificable','Consistente','Entendible','Modificable','Rastreable','Anotado'],
+    datasets: [{
+      label: 'SRS ideal',
+      data: [10,10,10,10,10,10,10,10,10],
+      backgroundColor: 'rgba(88,166,255,0.2)',
+      borderColor: '#58a6ff',
+      pointBackgroundColor: '#58a6ff'
+    }]
+  },
+  options: {
+    scales: { r: { beginAtZero: true, max: 10, grid: { color: '#30363d' }, angleLines: { color: '#30363d' }, pointLabels: { color: '#e6edf3', font: { size: 12 } }, ticks: { display: false } } },
+    plugins: { legend: { display: false } }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 · Requerimientos — IIS</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="top-nav">
+  <span class="crumb"><a href="index.html">IIS</a> / <strong>06 · Requerimientos</strong></span>
+  <span class="nav-links"><a href="05-procesos-de-negocio.html">◄ Anterior</a> <a href="index.html">Índice</a> <a href="07-especificacion.html">Siguiente ►</a></span>
+</nav>
+<div class="container">
+  <div class="hero">
+    <span class="chip">CAPÍTULO 06</span>
+    <h1>Requerimientos</h1>
+    <p class="sub">El 72% de los proyectos falla — y los requisitos mal gestionados son la causa #1.</p>
+  </div>
+
+  <h2>¿Qué es un requerimiento?</h2>
+  <blockquote>Pfleeger: "Una característica del sistema o una descripción de algo que el sistema es capaz de hacer con el objeto de satisfacer el propósito del sistema."</blockquote>
+  <p>La <strong>IEEE 610-1990</strong> lo define como:</p>
+  <ol>
+    <li>Condición o capacidad que necesita el usuario para resolver un problema.</li>
+    <li>Condición o capacidad que debe satisfacer un sistema o componente para cumplir un contrato, estándar o especificación.</li>
+  </ol>
+
+  <h2>Ingeniería de requerimientos — proceso completo</h2>
+  <pre class="mermaid">
+flowchart LR
+    E[1 · Extracción<br/>entrevistas<br/>cuestionarios<br/>observación] --> A[2 · Análisis<br/>procesar info]
+    A --> S[3 · Especificación<br/>documentar formalmente]
+    S --> V[4 · Validación<br/>cliente confirma]
+    V -.cambios.-> E
+  </pre>
+
+  <h2>¿Por qué hacerla? Los números asustan</h2>
+  <div class="grid">
+    <div class="kpi"><span class="n">28%</span><span class="l">Proyectos exitosos (Standish 2000, n=280.000)</span></div>
+    <div class="kpi"><span class="n">×5000</span><span class="l">Costo de un error detectado en producción vs. requisitos</span></div>
+    <div class="kpi"><span class="n">#1</span><span class="l">Causa de falla: requisitos deficientes</span></div>
+  </div>
+
+  <div class="chart-box">
+    <h4>Costo de detección de errores por etapa</h4>
+    <canvas id="costChart" height="100"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h4>Causas de fracaso (Standish Group)</h4>
+    <canvas id="failChart" height="100"></canvas>
+  </div>
+
+  <div class="card err">
+    <h3 style="margin-top:0">Causas principales de falla</h3>
+    <ul>
+      <li>Requisitos deficientes, incompletos o cambiantes.</li>
+      <li>Planificación sin base en los requisitos.</li>
+      <li>Estimaciones poco realistas.</li>
+      <li>Falta de participación del usuario.</li>
+    </ul>
+  </div>
+
+  <h2>Contexto, alcance y límite</h2>
+  <p>Antes de arrancar hay que definir <strong>qué entra y qué no</strong> en el sistema. No es arbitrario: influyen factores técnicos y económicos.</p>
+  <pre class="mermaid">
+flowchart TB
+    subgraph Contexto
+    subgraph Sistema
+    A[Funciones<br/>incluidas]
+    end
+    X[Áreas grises<br/>⚠️ minimizar]
+    Y[Fuera del alcance]
+    end
+  </pre>
+
+  <h2>Dominio: aplicación vs. software</h2>
+  <div class="grid">
+    <div class="card accent">
+      <h3 style="margin-top:0">Dominio de la aplicación</h3>
+      <p>Donde existe el requerimiento del cliente. El <strong>qué</strong> hay que hacer.</p>
+    </div>
+    <div class="card accent">
+      <h3 style="margin-top:0">Dominio del software</h3>
+      <p>Provee la solución. El <strong>cómo</strong> se construye.</p>
+    </div>
+  </div>
+
+  <h2>El problema de la abstracción</h2>
+  <p>El software es difícil de visualizar. Es fácil que el cliente diga "esto no es lo que pedí" aunque pensaba que sí lo era.</p>
+  <div class="card ok">
+    <h3 style="margin-top:0">Recomendaciones</h3>
+    <ul>
+      <li>No quedarse con descripciones genéricas — ahondar en detalles.</li>
+      <li>Evitar ambigüedades.</li>
+      <li>No dar nada por supuesto.</li>
+      <li>Dedicar tiempo a la especificación.</li>
+    </ul>
+  </div>
+
+  <h2>Defectos comunes</h2>
+  <details><summary>Falta de involucramiento del cliente/usuarios</summary><p>Sin un interlocutor presente, cualquier cosa puede pasar.</p></details>
+  <details><summary>Cambios sin gestión del impacto</summary><p>Todo cambio de requisito afecta tiempo, costo y otros requerimientos.</p></details>
+  <details><summary>Requisitos ambiguos</summary><p>Dos interpretaciones posibles del mismo requerimiento.</p></details>
+  <details><summary>Requisitos innecesarios</summary><p>El desarrollador agrega cosas que nadie pidió.</p></details>
+  <details><summary>Requisitos insuficientes</summary><p>Definición superficial.</p></details>
+  <details><summary>Omisión de grupos de usuarios</summary><p>Usuarios con necesidades específicas olvidados.</p></details>
+
+  <h2>Tipos de requerimientos</h2>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="f">Funcionales</button>
+      <button class="tab-btn" data-tab="nf">No funcionales</button>
+    </div>
+    <div class="tab-panel active" data-tab="f">
+      <div class="card">
+        <p><strong>Describen QUÉ hace el sistema.</strong> Entradas, salidas, interacciones, comportamiento ante cada estímulo.</p>
+        <blockquote>Si el sistema registra pedidos, el requerimiento debe especificar qué datos se ingresan, qué controles se hacen y qué salida se genera — tanto para válidos como inválidos.</blockquote>
+      </div>
+    </div>
+    <div class="tab-panel" data-tab="nf">
+      <div class="card">
+        <p><strong>Describen RESTRICCIONES sobre el sistema.</strong> Limitan las opciones de diseño.</p>
+        <ul>
+          <li>Performance, seguridad, portabilidad, eficiencia.</li>
+          <li>Plataforma o lenguaje de programación a usar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card warn">Los requerimientos llegan en <strong>lenguaje natural</strong> → ambigüedad → hay pérdida de información en la transformación a la especificación formal.</div>
+
+  <h2>Beneficios de buenos requisitos</h2>
+  <div class="grid">
+    <div class="card ok"><p>🤝 Acuerdo entre devs, usuarios y cliente.</p></div>
+    <div class="card ok"><p>📊 Base objetiva para estimar recursos.</p></div>
+    <div class="card ok"><p>✅ Permite validar que el producto cumple.</p></div>
+    <div class="card ok"><p>💰 Reduce costos — evita re-correcciones.</p></div>
+  </div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards">
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">% proyectos exitosos (Standish)</div>
+      <div class="flashcard-back">28% sobre 280.000 proyectos (año 2000).</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">4 etapas de la IR</div>
+      <div class="flashcard-back">Extracción, análisis, especificación, validación.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Funcional vs. no funcional</div>
+      <div class="flashcard-back">Funcional = qué hace. No funcional = restricciones.</div>
+    </div></div>
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Multiplicador de costo</div>
+      <div class="flashcard-back">Hasta ×5000 en producción vs. requisitos.</div>
+    </div></div>
+  </div>
+
+  <div class="quiz">
+    <h3>🎯 Autoevaluación</h3>
+    <div class="q">
+      <div class="question">1. "El sistema debe usar PostgreSQL" es un requerimiento...</div>
+      <div class="opts">
+        <div class="opt">Funcional</div>
+        <div class="opt" data-correct="1">No funcional (restricción de plataforma)</div>
+        <div class="opt">Ambiguo</div>
+        <div class="opt">Innecesario</div>
+      </div>
+      <div class="explain">Restringe la implementación pero no describe qué hace el sistema.</div>
+    </div>
+    <div class="q">
+      <div class="question">2. ¿Cuál es el orden correcto en ingeniería de requerimientos?</div>
+      <div class="opts">
+        <div class="opt">Especificación → extracción → análisis → validación</div>
+        <div class="opt" data-correct="1">Extracción → análisis → especificación → validación</div>
+        <div class="opt">Validación → extracción → especificación → análisis</div>
+        <div class="opt">Análisis → extracción → validación → especificación</div>
+      </div>
+      <div class="explain">Primero sacar info, después procesarla, documentarla y finalmente validar con el cliente.</div>
+    </div>
+    <div class="q">
+      <div class="question">3. Según Standish Group, la causa #1 de fracaso es...</div>
+      <div class="opts">
+        <div class="opt">Falta de tecnología</div>
+        <div class="opt">Equipos chicos</div>
+        <div class="opt" data-correct="1">Requisitos deficientes o cambiantes</div>
+        <div class="opt">Presupuesto bajo</div>
+      </div>
+      <div class="explain">Por eso tanto énfasis en la ingeniería de requerimientos.</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h3>🔑 Ideas clave para el parcial</h3>
+    <ul>
+      <li><strong>Requerimiento</strong> = condición o capacidad que necesita el usuario (IEEE 610).</li>
+      <li><strong>IR</strong>: extracción → análisis → especificación → validación.</li>
+      <li>Costo de detección crece <strong>exponencialmente</strong> cuanto más tarde se detecta.</li>
+      <li><strong>Funcional</strong>: qué hace. <strong>No funcional</strong>: restricciones.</li>
+      <li><strong>Standish</strong>: solo 28% de éxito. Causa #1: requisitos deficientes.</li>
+    </ul>
+  </div>
+
+  <div class="pager">
+    <a href="05-procesos-de-negocio.html"><span class="label">◄ Anterior</span><span class="title">05 · Procesos de negocio</span></a>
+    <a href="07-especificacion.html" class="next"><span class="label">Siguiente ►</span><span class="title">07 · Especificación (SRS)</span></a>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+
+const textColor = '#e6edf3', gridColor = '#30363d';
+Chart.defaults.color = textColor;
+Chart.defaults.borderColor = gridColor;
+
+new Chart(document.getElementById('costChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Requisitos', 'Diseño', 'Codificación', 'Pruebas', 'Mantenimiento / Producción'],
+    datasets: [{
+      label: 'Costo relativo de corregir un error',
+      data: [1, 5, 10, 50, 5000],
+      backgroundColor: ['#3fb950','#58a6ff','#d2a8ff','#d29922','#f85149']
+    }]
+  },
+  options: {
+    scales: { y: { type: 'logarithmic', title: { display: true, text: 'Costo (escala logarítmica)' } } },
+    plugins: { legend: { display: false } }
+  }
+});
+
+new Chart(document.getElementById('failChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Requisitos deficientes', 'Planificación sin base', 'Estimaciones poco realistas', 'Falta de participación del usuario', 'Otras'],
+    datasets: [{
+      data: [35, 20, 20, 15, 10],
+      backgroundColor: ['#f85149','#d29922','#d2a8ff','#58a6ff','#8b949e']
+    }]
+  },
+  options: { plugins: { legend: { position: 'right' } } }
+});
+</script>
+</body>
+</html>
