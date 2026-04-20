@@ -349,19 +349,38 @@ details > *:not(summary) { margin-top: 0.75rem; }
 .q .q-meta { margin-top: 0.85rem; color: var(--text-disabled); font-size: 0.75rem; text-align: right; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* ========================= FLASHCARDS ========================= */
-.flashcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-.flashcard { perspective: 1000px; height: 170px; cursor: pointer; }
-.flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+.flashcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.flashcard { perspective: 1200px; min-height: 260px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; min-height: inherit; transition: transform 0.6s; transform-style: preserve-3d; }
 .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
 .flashcard-front, .flashcard-back {
-  position: absolute; width: 100%; height: 100%;
+  position: absolute; inset: 0;
   backface-visibility: hidden;
-  border-radius: var(--radius); padding: 1rem;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border);
+  overflow: auto;
 }
-.flashcard-front { background: var(--bg-card); color: var(--text); font-weight: 500; }
-.flashcard-back { background: var(--accent); color: #fff; transform: rotateY(180deg); font-size: 0.9rem; border-color: var(--accent); }
+.flashcard-front {
+  background: var(--bg-card); color: var(--text); font-weight: 600;
+  font-size: 1rem; letter-spacing: -0.01em;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.flashcard-back {
+  background: var(--accent); color: #fff;
+  transform: rotateY(180deg);
+  border-color: var(--accent);
+  font-size: 0.82rem; line-height: 1.45;
+  text-align: left;
+  display: block;
+}
+.flashcard-back p { margin: 0 0 0.5rem; }
+.flashcard-back p:last-child { margin-bottom: 0; }
+.flashcard-back ul, .flashcard-back ol { margin: 0.25rem 0; padding-left: 1.1rem; }
+.flashcard-back li { margin-bottom: 0.2rem; }
+.flashcard-back strong { color: #fff; }
+.flashcard-back code { background: rgba(0,0,0,0.25); color: #fff; border-color: rgba(255,255,255,0.2); }
+.flashcard-back::-webkit-scrollbar { width: 6px; }
+.flashcard-back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.35); border-radius: 3px; }
 
 /* ========================= MERMAID / DIAGRAMS ========================= */
 .mermaid { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin: 1.25rem 0; text-align: center; }
@@ -552,12 +571,74 @@ details > *:not(summary) { margin-top: 0.75rem; }
 .btn-tf.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 /* ========================= MEDIA ========================= */
-@media (max-width: 640px) {
-  .container { padding: 1.5rem 1.1rem 4rem; }
-  .hero { padding: 2.5rem 0 2rem; }
-  h2 { margin-top: 3rem; }
-  .pager { flex-direction: column; }
+@media (max-width: 720px) {
+  .container { padding: 1.25rem 1rem 4rem; }
+
+  /* Top nav: apilar breadcrumb y links, reducir padding */
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+  .top-nav .nav-links { gap: 1rem; flex-wrap: wrap; }
+  .top-nav .crumb,
+  .top-nav .nav-links a { font-size: 0.7rem; }
+
+  /* Hero más chico y con line-height más respirado */
+  .hero { padding: 2rem 0 1.75rem; margin-bottom: 1.25rem; }
+  .hero h1 { font-size: clamp(2rem, 11vw, 3.25rem); line-height: 1; word-break: break-word; }
+  .hero p.sub { font-size: 0.95rem; }
+  .hero .chip { font-size: 0.65rem; margin-bottom: 1.25rem; letter-spacing: 0.1em; }
+
+  /* Headings */
+  h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  h3 { font-size: 1.05rem; margin-top: 1.5rem; }
+
+  /* Cards con menos padding */
+  .card { padding: 1.1rem 1.1rem; }
+  .kpi { padding: 1.25rem 1.1rem; }
+  .kpi .n { font-size: 2.25rem; }
+
+  /* Grid: una columna en pantallas chicas */
+  .grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
+  /* Tablas y código scrollables horizontalmente */
+  table { display: block; overflow-x: auto; white-space: nowrap; font-size: 0.85rem; }
+  th, td { padding: 0.65rem 0.85rem; }
+  pre { font-size: 0.8rem; padding: 0.85rem 1rem; }
+
+  /* Pager en una sola columna */
+  .pager { flex-direction: column; margin-top: 2.5rem; }
+  .pager a { padding: 1rem 1.1rem; }
+  .pager a.next { text-align: left; align-items: flex-start; }
+
+  /* Exam bar en mobile: top offset menor */
+  .exam-bar { top: 0; flex-wrap: wrap; padding: 0.7rem 0.9rem; }
+  .exam-timer { font-size: 1rem; min-width: 52px; }
+  .exam-controls { gap: 0.65rem; }
+
+  /* Blockquote menos padding */
+  blockquote { padding: 0.85rem 1.1rem; font-size: 0.95rem; }
+
+  /* Flashcards: siempre una columna */
+  .flashcards { grid-template-columns: 1fr; }
+
+  /* Tabs scroll horizontal */
+  .tab-buttons { overflow-x: auto; flex-wrap: nowrap; }
+  .tab-btn { white-space: nowrap; }
+
+  /* Quiz options — padding reducido */
+  .q { padding: 1rem; }
+  .q .opt { padding: 0.6rem 0.85rem; font-size: 0.9rem; }
+
+  /* Diagramas: scroll si hace falta */
+  .diagram { padding: 1rem; overflow-x: auto; }
 }
+
+/* Prevención global de overflow horizontal */
+html, body { overflow-x: hidden; max-width: 100%; }
+img, svg, video, canvas { max-width: 100%; height: auto; }
 
 /* ========================= SELECTION ========================= */
 ::selection { background: var(--accent); color: #fff; }

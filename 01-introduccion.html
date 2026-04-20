@@ -138,20 +138,72 @@ flowchart TD
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">¿Qué pasó en 1968?</div>
-      <div class="flashcard-back">Conferencia OTAN: nacen "crisis del software" e "ingeniería del software".</div>
+      <div class="flashcard-front">¿Qué es la Ingeniería de Software?</div>
+      <div class="flashcard-back">
+        <p>Disciplina que aplica <strong>métodos, técnicas y herramientas sistemáticas</strong> al desarrollo, operación y mantenimiento de software.</p>
+        <p>Surge en la conferencia de la OTAN de <strong>1968</strong> como respuesta a la "crisis del software".</p>
+        <p>Definiciones:</p>
+        <ul>
+          <li><strong>Bauer (1968):</strong> principios de ingeniería para obtener SW económico y eficiente.</li>
+          <li><strong>IEEE (1993):</strong> aplicación de métodos sistemáticos, disciplinados y cuantificables.</li>
+          <li><strong>Boehm:</strong> aplicación práctica del conocimiento científico al diseño y construcción de programas.</li>
+        </ul>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Modularidad = ?</div>
-      <div class="flashcard-back">Alta cohesión + bajo acoplamiento.</div>
+      <div class="flashcard-front">Principios: Rigor y Formalidad</div>
+      <div class="flashcard-back">
+        <p><strong>Rigor:</strong> enfoque preciso y disciplinado que complementa (no reemplaza) a la creatividad del desarrollo.</p>
+        <p><strong>Formalidad:</strong> nivel máximo de rigor — uso de notaciones matemáticas que permiten razonar y verificar el software de forma no ambigua.</p>
+        <p>Ambos reducen la subjetividad y facilitan la verificación, documentación y comunicación dentro del equipo.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">4 dificultades esenciales (Brooks)</div>
-      <div class="flashcard-back">Complejidad, conformidad, variabilidad, invisibilidad.</div>
+      <div class="flashcard-front">Brooks — Esencia y Accidente</div>
+      <div class="flashcard-back">
+        <p>En <em>"No Silver Bullet"</em> Brooks divide las dificultades del software en dos:</p>
+        <p><strong>Esenciales</strong> (inherentes, no desaparecen):</p>
+        <ul>
+          <li><strong>Complejidad:</strong> cada SW es único, con miles de estados.</li>
+          <li><strong>Conformidad:</strong> debe adaptarse a interfaces humanas e institucionales.</li>
+          <li><strong>Variabilidad:</strong> está sometido a cambios constantes.</li>
+          <li><strong>Invisibilidad:</strong> no se puede visualizar fácilmente.</li>
+        </ul>
+        <p><strong>Accidentales:</strong> las que se resuelven con tecnología (lenguajes pobres, poca memoria, herramientas débiles).</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Producto de software</div>
-      <div class="flashcard-back">Código + docs + diseño + pruebas + manuales. No solo el .exe.</div>
+      <div class="flashcard-front">Producto de software y Modularidad</div>
+      <div class="flashcard-back">
+        <p><strong>Producto ≠ ejecutable.</strong> Incluye código fuente, documentación de requisitos y diseño, datos de prueba y manuales — <em>todo</em>.</p>
+        <p><strong>Modularidad</strong> = dividir el sistema en módulos con:</p>
+        <ul>
+          <li><strong>Alta cohesión:</strong> cada módulo hace una sola cosa bien.</li>
+          <li><strong>Bajo acoplamiento:</strong> los módulos dependen poco entre sí.</li>
+        </ul>
+        <p>Facilita mantenibilidad, verificabilidad y reuso.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Cualidades internas vs externas (Ghezzi)</div>
+      <div class="flashcard-back">
+        <p><strong>Internas:</strong> interesan al desarrollador — verificabilidad, mantenibilidad, reusabilidad, portabilidad, productividad.</p>
+        <p><strong>Externas:</strong> visibles al usuario — correctitud, confiabilidad, robustez, performance, amigabilidad, integridad.</p>
+        <p>Las internas habilitan las externas: un SW mantenible es más fácil de volver confiable.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Productividad (cualidad)</div>
+      <div class="flashcard-back">
+        <p>Cualidad <strong>interna</strong> del proceso de software: cantidad de producto útil entregado por unidad de recurso (tiempo, personas, dinero).</p>
+        <p>Mejora con: reuso, buenas herramientas, automatización de pruebas, procesos definidos y equipos cohesionados.</p>
+        <p>No confundir con performance (cualidad del producto, no del proceso).</p>
+      </div>
     </div></div>
   </div>
 
@@ -188,6 +240,51 @@ flowchart TD
       <div class="explain">Un módulo bien diseñado hace una sola cosa (cohesión) y depende poco de otros (acoplamiento).</div>
     </div>
   </div>
+
+  <h2>Preguntas tipo parcial</h2>
+
+  <details>
+    <summary><strong>P1 · ¿Qué es la Ingeniería de Software?</strong> <em>(1 punto)</em></summary>
+    <div class="card accent">
+      <p>La Ingeniería de Software es la disciplina que se ocupa del desarrollo, operación y mantenimiento del software aplicando <strong>métodos, técnicas y herramientas sistemáticas, disciplinadas y cuantificables</strong> (IEEE, 1993). Nace en la conferencia de la OTAN de <strong>1968</strong> como respuesta a la <em>crisis del software</em> (proyectos con sobrecosto, atrasos y mantenimiento caro).</p>
+      <p>Otras definiciones clave:</p>
+      <ul>
+        <li><strong>Bauer (1968):</strong> "Establecimiento y uso de principios de ingeniería para obtener software económico que trabaje de forma eficiente en máquinas reales."</li>
+        <li><strong>Boehm:</strong> "Aplicación práctica del conocimiento científico al diseño y construcción de programas y la documentación asociada requerida para desarrollarlos, operarlos y mantenerlos."</li>
+      </ul>
+      <p>No se limita al código: abarca el <strong>producto completo</strong> (código, documentación, pruebas, manuales) y el <strong>proceso</strong> que lo genera.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><strong>P3 · Explique la cualidad de Productividad y los principios de Rigor y Formalidad.</strong> <em>(2 puntos)</em></summary>
+    <div class="card accent">
+      <h3 style="margin-top:0">Productividad</h3>
+      <p>Es una <strong>cualidad interna del proceso</strong> (no del producto) definida por Ghezzi. Mide la <strong>cantidad de producto útil entregado por unidad de recurso</strong> consumido (tiempo, personas, costo). Un proceso productivo permite obtener un software de calidad con el menor costo posible. Se mejora con reuso, automatización, buenas herramientas y equipos cohesionados.</p>
+      <h3>Rigor</h3>
+      <p>Es uno de los <strong>principios</strong> de la ingeniería de software: enfoque preciso y disciplinado que <strong>complementa (no reemplaza) a la creatividad</strong>. Impone ser sistemáticos al analizar, diseñar y documentar. Reduce la subjetividad y los errores.</p>
+      <h3>Formalidad</h3>
+      <p>Es el <strong>grado máximo de rigor</strong>: uso de notaciones matemáticas precisas y no ambiguas para describir o verificar el software. Permite demostrar propiedades del sistema (p. ej. correctitud) sin depender de la interpretación humana.</p>
+      <p><strong>Relación:</strong> la formalidad es siempre rigurosa, pero el rigor no exige necesariamente formalidad.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><strong>P4 · Según Brooks ("No Silver Bullet"): dificultades esenciales vs. accidentales. Enumere y explique las esenciales.</strong> <em>(2 puntos)</em></summary>
+    <div class="card accent">
+      <p>Frederick Brooks, en <em>"No Silver Bullet: Essence and Accidents of Software Engineering"</em>, sostiene que <strong>no existe una única técnica o herramienta que resuelva por sí sola los problemas del software</strong>. Para explicarlo divide las dificultades en dos categorías:</p>
+      <h3 style="margin-top:0">Dificultades accidentales</h3>
+      <p>Las <strong>resolubles con avances tecnológicos</strong>: lenguajes limitados, poca memoria, herramientas débiles, compiladores lentos. Son temporales — la tecnología las va mitigando.</p>
+      <h3>Dificultades esenciales (inherentes, no desaparecen)</h3>
+      <ol>
+        <li><strong>Complejidad:</strong> cada sistema software es único y contiene muchos estados posibles que interactúan entre sí. A diferencia de otras disciplinas, los componentes no se repiten — si dos funciones son idénticas, se fusionan. El resultado es que todo software nuevo tiene una complejidad irreducible.</li>
+        <li><strong>Conformidad:</strong> el software debe adaptarse a interfaces humanas, institucionales, legales y a otros sistemas preexistentes. Esa conformidad es arbitraria y externa al problema, por lo que es imposible eliminarla con abstracción.</li>
+        <li><strong>Variabilidad:</strong> el software está sometido a <strong>cambios constantes</strong> — nuevas necesidades, regulaciones, entornos. Un software exitoso se modifica toda su vida útil.</li>
+        <li><strong>Invisibilidad:</strong> el software es intangible, no se puede visualizar geométricamente como un plano o una máquina. Esto dificulta la comunicación, el diseño y la detección de fallas.</li>
+      </ol>
+      <p><strong>Conclusión:</strong> los avances resuelven las accidentales, pero las esenciales requieren buenas prácticas de ingeniería (modularidad, abstracción, reuso, prototipado, equipos hábiles) en vez de una "bala de plata".</p>
+    </div>
+  </details>
 
   <div class="keypoints">
     <h3>🔑 Ideas clave para el parcial</h3>
