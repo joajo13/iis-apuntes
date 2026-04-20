@@ -60,12 +60,10 @@
   <pre class="mermaid">
 flowchart TD
     S((Inicio)) --> A[Interesado consulta]
-    A --> F{{fork}}
-    F --> B[Verificar cursos disponibles]
-    F --> C[Verificar horarios]
-    B --> J{{join}}
-    C --> J
-    J --> D[Entregar info al interesado]
+    A --> B[Verificar cursos disponibles]
+    A --> C[Verificar horarios]
+    B --> D[Entregar info al interesado]
+    C --> D
     D --> E((Fin))
   </pre>
   <div class="card accent">Los <strong>carriles</strong> (swimlanes) dividen en columnas — cada columna = un responsable.</div>
