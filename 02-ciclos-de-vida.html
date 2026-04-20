@@ -24,16 +24,56 @@
   <div class="card accent">La elección afecta <strong>productividad, calidad, riesgo</strong> y relación con el cliente.</div>
 
   <h2>1 · Cascada (ciclo de vida clásico)</h2>
-  <p>El modelo más viejo, pero todavía se usa. Etapas <strong>secuenciales</strong>: cada una debe estar 100% terminada antes de empezar la siguiente.</p>
-  <pre class="mermaid">
-flowchart TD
-    A[Análisis y especificación<br/>de requerimientos] --> B[Diseño]
-    B --> C[Codificación]
-    C --> D[Pruebas]
-    D --> E[Integración]
-    E --> F[Operación y mantenimiento]
-    F -.retorno modificado.-> A
-  </pre>
+  <p>El modelo más viejo, pero todavía se usa. Etapas <strong>secuenciales</strong>: cada una debe estar 100% terminada antes de empezar la siguiente. En la variante <em>modificada</em> se permite retornar a etapas previas ante errores (flechas rojas punteadas).</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo de vida en cascada">
+      <defs>
+        <linearGradient id="c-stage" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#58a6ff"/><stop offset="1" stop-color="#1d4ed8"/>
+        </linearGradient>
+        <marker id="c-arrD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+        </marker>
+        <marker id="c-arrU" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#f85149"/>
+        </marker>
+      </defs>
+      <style>
+        .cbox { fill:url(#c-stage); stroke:#58a6ff; stroke-width:1; }
+        .ctxt { fill:#fff; font:600 13px "Segoe UI",system-ui,sans-serif; text-anchor:middle; }
+        .carrD { stroke:#8b949e; stroke-width:2; fill:none; }
+        .carrU { stroke:#f85149; stroke-width:1.8; fill:none; stroke-dasharray:5 4; }
+        .clg { fill:#8b949e; font:italic 12px "Segoe UI",sans-serif; }
+      </style>
+      <rect class="cbox" x="20"  y="20"  width="200" height="50" rx="8"/>
+      <text class="ctxt" x="120" y="50">Análisis y Especificación</text>
+      <rect class="cbox" x="140" y="100" width="150" height="50" rx="8"/>
+      <text class="ctxt" x="215" y="130">Diseño</text>
+      <rect class="cbox" x="250" y="180" width="150" height="50" rx="8"/>
+      <text class="ctxt" x="325" y="210">Codificación</text>
+      <rect class="cbox" x="360" y="260" width="150" height="50" rx="8"/>
+      <text class="ctxt" x="435" y="290">Pruebas</text>
+      <rect class="cbox" x="470" y="340" width="150" height="50" rx="8"/>
+      <text class="ctxt" x="545" y="370">Integración</text>
+      <rect class="cbox" x="580" y="395" width="170" height="30" rx="6"/>
+      <text class="ctxt" x="665" y="414">Operación y mantenimiento</text>
+
+      <path class="carrD" d="M130,70 V100" marker-end="url(#c-arrD)"/>
+      <path class="carrD" d="M225,150 V180" marker-end="url(#c-arrD)"/>
+      <path class="carrD" d="M335,230 V260" marker-end="url(#c-arrD)"/>
+      <path class="carrD" d="M445,310 V340" marker-end="url(#c-arrD)"/>
+      <path class="carrD" d="M555,390 V395" marker-end="url(#c-arrD)"/>
+
+      <path class="carrU" d="M205,100 V70" marker-end="url(#c-arrU)"/>
+      <path class="carrU" d="M315,180 V150" marker-end="url(#c-arrU)"/>
+      <path class="carrU" d="M425,260 V230" marker-end="url(#c-arrU)"/>
+      <path class="carrU" d="M535,340 V310" marker-end="url(#c-arrU)"/>
+      <path class="carrU" d="M645,395 V390" marker-end="url(#c-arrU)"/>
+
+      <text class="clg" x="20" y="430">Flechas rojas = retorno a etapas previas ante errores (cascada modificada).</text>
+    </svg>
+    <figcaption>Etapas secuenciales del ciclo clásico — cada salida alimenta la siguiente etapa.</figcaption>
+  </figure>
   <div class="grid">
     <div class="card ok">
       <h3 style="margin-top:0">✅ Ventajas</h3>
@@ -47,44 +87,227 @@ flowchart TD
   <blockquote>Ideal cuando los requisitos están completamente definidos y no se esperan cambios.</blockquote>
 
   <h2>2 · Espiral (Barry Boehm, años 80)</h2>
-  <p>Gran aporte: incorpora <strong>análisis de riesgos</strong> al ciclo de vida. El proyecto es una suma de mini-proyectos.</p>
-  <pre class="mermaid">
-flowchart LR
-    P[1 · Planificación<br/>objetivos, alternativas] --> R[2 · Análisis de riesgos<br/>evaluar, prevenir]
-    R --> I[3 · Ingeniería<br/>desarrollo del producto]
-    I --> E[4 · Evaluación del cliente<br/>¿seguimos?]
-    E --> P
-  </pre>
-  <div class="card accent">Cada vuelta cubre las 4 actividades y genera un incremento del producto.</div>
+  <p>Gran aporte: incorpora <strong>análisis de riesgos</strong> al ciclo de vida. El proyecto es una suma de mini-proyectos. Cada vuelta cubre los 4 cuadrantes y el <em>radio</em> representa el coste acumulado.</p>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="esp-web">Versión web</button>
+      <button class="tab-btn" data-tab="esp-apunte">Versión del apunte</button>
+    </div>
+    <div class="tab-panel active" data-tab="esp-web">
+  <figure class="diagram">
+    <svg viewBox="0 0 820 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modelo en espiral de Boehm">
+      <defs>
+        <marker id="s-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/>
+        </marker>
+        <marker id="s-cost" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+        </marker>
+        <radialGradient id="s-bg" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="rgba(88,166,255,0.10)"/>
+          <stop offset="100%" stop-color="rgba(88,166,255,0)"/>
+        </radialGradient>
+      </defs>
+      <style>
+        .sq1 { fill:rgba(88,166,255,0.06); }
+        .sq2 { fill:rgba(210,168,255,0.06); }
+        .sq3 { fill:rgba(63,185,80,0.06); }
+        .sq4 { fill:rgba(210,153,34,0.06); }
+        .saxis { stroke:#30363d; stroke-width:1.2; }
+        .stitle { font:700 13px "Segoe UI",sans-serif; fill:#e6edf3; text-anchor:middle; }
+        .snum { font:700 15px "Segoe UI",sans-serif; fill:#58a6ff; text-anchor:middle; }
+        .sspiral { fill:none; stroke:#58a6ff; stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round; }
+        .slbl { font:11px "Segoe UI",sans-serif; fill:#c9d1d9; }
+        .slbl-r { text-anchor:end; }
+        .scost { font:italic 11px "Segoe UI",sans-serif; fill:#8b949e; }
+        .sdot { fill:#58a6ff; }
+        .sring { fill:none; stroke:#30363d; stroke-width:0.8; stroke-dasharray:2 3; }
+        .scyc { font:600 10px "Segoe UI",sans-serif; fill:#58a6ff; text-anchor:middle; }
+      </style>
 
-  <h2>3 · Incremental</h2>
-  <p>Le suma flexibilidad a cascada. Soluciona su mayor problema: el cliente no veía nada.</p>
+      <!-- Quadrant backgrounds -->
+      <rect class="sq1" x="10"  y="40"  width="400" height="360"/>
+      <rect class="sq2" x="410" y="40"  width="400" height="360"/>
+      <rect class="sq4" x="10"  y="400" width="400" height="340"/>
+      <rect class="sq3" x="410" y="400" width="400" height="340"/>
+
+      <circle cx="410" cy="400" r="320" fill="url(#s-bg)"/>
+
+      <!-- Dashed cycle rings -->
+      <circle class="sring" cx="410" cy="400" r="80"/>
+      <circle class="sring" cx="410" cy="400" r="165"/>
+      <circle class="sring" cx="410" cy="400" r="255"/>
+
+      <!-- Axes -->
+      <line class="saxis" x1="410" y1="40"  x2="410" y2="740"/>
+      <line class="saxis" x1="10"  y1="400" x2="810" y2="400"/>
+
+      <!-- Quadrant titles -->
+      <text class="stitle" x="210" y="20"><tspan fill="#58a6ff" font-size="15">1</tspan>  ·  DETERMINAR OBJETIVOS,</text>
+      <text class="stitle" x="210" y="36">ALTERNATIVAS Y RESTRICCIONES</text>
+
+      <text class="stitle" x="610" y="20"><tspan fill="#58a6ff" font-size="15">2</tspan>  ·  EVALUAR ALTERNATIVAS,</text>
+      <text class="stitle" x="610" y="36">IDENTIFICAR Y RESOLVER RIESGOS</text>
+
+      <text class="stitle" x="210" y="762"><tspan fill="#58a6ff" font-size="15">4</tspan>  ·  PLANIFICAR LAS FASES SIGUIENTES</text>
+
+      <text class="stitle" x="610" y="762"><tspan fill="#58a6ff" font-size="15">3</tspan>  ·  DESARROLLAR Y VERIFICAR EL PRODUCTO</text>
+
+      <!-- Cost accumulado arrow along radius -->
+      <line class="saxis" x1="410" y1="400" x2="720" y2="400" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#s-cost)"/>
+      <text class="scost" x="565" y="392" text-anchor="middle">coste acumulado →</text>
+
+      <!-- Cycle ring tags -->
+      <text class="scyc" x="410" y="326">ciclo 1</text>
+      <text class="scyc" x="410" y="241">ciclo 2</text>
+      <text class="scyc" x="410" y="151">ciclo 3</text>
+
+      <!-- Archimedean spiral (r = 3 + 0.25·θ°, 3 loops, clockwise starting from top) -->
+      <path class="sspiral" marker-end="url(#s-arr)" d="
+        M 410,397
+        L 415.3,390.9 L 425.6,391 L 435.5,400 L 438.6,416.5 L 430.3,435.1
+        L 410,448 L 382.3,448.1 L 355.4,431.5 L 339.5,400 L 342.5,361 L 367.3,326
+        L 410,307 L 460.3,313 L 503.5,346 L 525.5,400 L 516.5,461.5 L 475.3,514
+        L 410,538 L 337.3,526 L 277.5,476.5 L 249.5,400 L 264.5,316 L 322.3,248
+        L 410,217 L 505.3,235 L 581.5,301 L 615.5,400 L 594.5,506.5 L 520.3,591
+        L 410,628 L 292.3,604 L 199.5,521.5 L 159.5,400 L 186.6,271 L 277.3,170.1
+        L 410,127
+      "/>
+      <circle class="sdot" cx="410" cy="400" r="3.5"/>
+
+      <!-- Activity labels at each spiral pass -->
+      <!-- Ciclo 2 -->
+      <text class="slbl slbl-r" x="360" y="320">Plan de desarrollo</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="365" y1="323" x2="388" y2="328"/>
+
+      <text class="slbl" x="498" y="334">Análisis de riesgos</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="495" y1="337" x2="485" y2="344"/>
+
+      <text class="slbl" x="490" y="508">Diseño del SW</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="487" y1="504" x2="478" y2="498"/>
+
+      <text class="slbl slbl-r" x="300" y="472">Validación de requisitos</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="305" y1="469" x2="320" y2="462"/>
+
+      <!-- Ciclo 3 -->
+      <text class="slbl slbl-r" x="280" y="238">Plan integración y pruebas</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="285" y1="241" x2="310" y2="246"/>
+
+      <text class="slbl" x="595" y="282">Prototipo operativo</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="592" y1="285" x2="584" y2="294"/>
+
+      <text class="slbl" x="535" y="590">Codificación / Integración / Pruebas</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="530" y1="586" x2="522" y2="580"/>
+
+      <text class="slbl slbl-r" x="195" y="508">Evaluación del cliente</text>
+      <line stroke="#8b949e" stroke-width="0.8" x1="200" y1="511" x2="220" y2="516"/>
+    </svg>
+    <figcaption>Espiral de Arquímedes (Boehm, 1988): el radio = coste acumulado; cada vuelta atraviesa los 4 cuadrantes y produce un incremento del producto.</figcaption>
+  </figure>
+    </div>
+    <div class="tab-panel" data-tab="esp-apunte">
+      <figure class="diagram diagram-light">
+        <img src="../resumen-images/02-p14-img03.png" alt="Modelo en espiral según el apunte">
+        <figcaption>Diagrama original del apunte (p. 14).</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <h2>3 · Incremental (entrega por etapas)</h2>
+  <p>Le suma flexibilidad a cascada. Soluciona su mayor problema: el cliente no veía nada hasta el final.</p>
   <ol>
-    <li>Especificar requerimientos <strong>una vez</strong>.</li>
-    <li>Descomponer en <strong>partes operativas</strong>.</li>
-    <li>Entregar cada parte al cliente mientras se sigue el resto.</li>
+    <li>Especificar requerimientos <strong>una vez</strong> al comienzo.</li>
+    <li>Descomponer el sistema en <strong>partes operativas</strong> (sub-sistemas) priorizadas.</li>
+    <li>Diseñar, codificar, probar e integrar cada incremento y <strong>entregarlo al cliente</strong> mientras se sigue con el resto.</li>
   </ol>
-  <pre class="mermaid">
-gantt
-    title Entregas incrementales solapadas
-    dateFormat X
-    axisFormat %s
-    section Incremento 1
-    Análisis : 0, 2
-    Diseño   : 2, 4
-    Código   : 4, 6
-    Entrega  : 6, 7
-    section Incremento 2
-    Análisis : 3, 5
-    Diseño   : 5, 7
-    Código   : 7, 9
-    Entrega  : 9, 10
-    section Incremento 3
-    Análisis : 6, 8
-    Diseño   : 8, 10
-    Código   : 10, 12
-    Entrega  : 12, 13
-  </pre>
+  <div class="grid">
+    <div class="card ok">
+      <h3 style="margin-top:0">✅ Ventajas</h3>
+      <ul>
+        <li>El cliente <strong>ve avances</strong> tempranos y opera sub-sistemas reales.</li>
+        <li>Las partes más importantes se entregan primero → si se cancela, lo crítico ya está.</li>
+        <li>Permite <strong>paralelizar</strong> equipos sobre distintos incrementos.</li>
+        <li>Reduce el riesgo de integración final: se integra de a poco.</li>
+        <li>El feedback temprano evita desvíos grandes.</li>
+      </ul>
+    </div>
+    <div class="card err">
+      <h3 style="margin-top:0">❌ Desventajas</h3>
+      <ul>
+        <li>Requiere que el sistema sea <strong>descomponible</strong> en partes operativas independientes.</li>
+        <li>La especificación inicial debe ser <strong>suficientemente estable</strong> — si cambia mucho, se rompe el modelo.</li>
+        <li>La arquitectura debe pensarse desde el principio para soportar todos los incrementos (riesgo de mala arquitectura).</li>
+        <li>Gestión más compleja: múltiples entregas solapadas en el tiempo.</li>
+        <li>Costos de integración y regresión repetidos por cada incremento.</li>
+      </ul>
+    </div>
+  </div>
+  <figure class="diagram">
+    <svg viewBox="0 0 1180 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modelo incremental">
+      <defs>
+        <linearGradient id="i-req" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d2a8ff"/><stop offset="1" stop-color="#6e40c9"/>
+        </linearGradient>
+        <linearGradient id="i-box" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#58a6ff"/><stop offset="1" stop-color="#1d4ed8"/>
+        </linearGradient>
+        <marker id="i-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+        </marker>
+      </defs>
+      <style>
+        .ireq { fill:url(#i-req); }
+        .ibox { fill:url(#i-box); stroke:#1f6feb; }
+        .it   { fill:#fff; font:600 12px "Segoe UI",sans-serif; text-anchor:middle; }
+        .iline { stroke:#8b949e; stroke-width:1.5; fill:none; }
+        .isub { fill:#e6edf3; font:600 13px "Segoe UI",sans-serif; }
+        .ibr { stroke:#8b949e; stroke-width:1.5; fill:none; }
+      </style>
+
+      <rect class="ireq" x="20" y="40" width="64" height="240" rx="6"/>
+      <text class="it" x="52" y="160" transform="rotate(-90 52 160)">Análisis y Especificación</text>
+
+      <g transform="translate(110,50)">
+        <rect class="ibox" x="0"   y="0" width="130" height="40" rx="6"/><text class="it" x="65"  y="25">Diseño</text>
+        <rect class="ibox" x="140" y="0" width="130" height="40" rx="6"/><text class="it" x="205" y="25">Codificación</text>
+        <rect class="ibox" x="280" y="0" width="130" height="40" rx="6"/><text class="it" x="345" y="25">Pruebas</text>
+        <rect class="ibox" x="420" y="0" width="130" height="40" rx="6"/><text class="it" x="485" y="25">Integración</text>
+        <rect class="ibox" x="560" y="0" width="170" height="40" rx="6"/><text class="it" x="645" y="18">Operación y</text><text class="it" x="645" y="33">mantenimiento</text>
+        <path class="iline" d="M740,20 H820" marker-end="url(#i-arr)"/>
+        <text class="isub" x="828" y="25">Sub-sistema 1</text>
+      </g>
+
+      <g transform="translate(200,115)">
+        <rect class="ibox" x="0"   y="0" width="130" height="40" rx="6"/><text class="it" x="65"  y="25">Diseño</text>
+        <rect class="ibox" x="140" y="0" width="130" height="40" rx="6"/><text class="it" x="205" y="25">Codificación</text>
+        <rect class="ibox" x="280" y="0" width="130" height="40" rx="6"/><text class="it" x="345" y="25">Pruebas</text>
+        <rect class="ibox" x="420" y="0" width="130" height="40" rx="6"/><text class="it" x="485" y="25">Integración</text>
+        <rect class="ibox" x="560" y="0" width="170" height="40" rx="6"/><text class="it" x="645" y="18">Operación y</text><text class="it" x="645" y="33">mantenimiento</text>
+        <path class="iline" d="M740,20 H730" marker-end="url(#i-arr)"/>
+        <text class="isub" x="738" y="25">Sub-sistema 2</text>
+      </g>
+
+      <g transform="translate(290,180)">
+        <rect class="ibox" x="0"   y="0" width="130" height="40" rx="6"/><text class="it" x="65"  y="25">Diseño</text>
+        <rect class="ibox" x="140" y="0" width="130" height="40" rx="6"/><text class="it" x="205" y="25">Codificación</text>
+        <rect class="ibox" x="280" y="0" width="130" height="40" rx="6"/><text class="it" x="345" y="25">Pruebas</text>
+        <rect class="ibox" x="420" y="0" width="130" height="40" rx="6"/><text class="it" x="485" y="25">Integración</text>
+        <rect class="ibox" x="560" y="0" width="60"  height="40" rx="6"/><text class="it" x="590" y="25">…</text>
+        <path class="iline" d="M625,20 H700" marker-end="url(#i-arr)"/>
+        <text class="isub" x="708" y="25">Sub-sistema 3</text>
+      </g>
+
+      <g transform="translate(380,245)">
+        <rect class="ibox" x="0"   y="0" width="130" height="40" rx="6"/><text class="it" x="65"  y="25">Diseño</text>
+        <rect class="ibox" x="140" y="0" width="130" height="40" rx="6"/><text class="it" x="205" y="25">Codificación</text>
+        <rect class="ibox" x="280" y="0" width="60"  height="40" rx="6"/><text class="it" x="310" y="25">…</text>
+      </g>
+
+      <path class="ibr" d="M1100,50 q20,0 20,25 v80 q0,15 15,15 q-15,0 -15,15 v80 q0,25 -20,25"/>
+      <text class="isub" x="1132" y="188" transform="rotate(90 1132 188)">Sistema</text>
+    </svg>
+    <figcaption>Los requerimientos se especifican una sola vez; los incrementos se solapan y cada uno entrega un sub-sistema operativo.</figcaption>
+  </figure>
   <div class="card ok"><strong>Variante: Diseño por planificación.</strong> Las entregas se ordenan por prioridad del cliente. Si se cancela, lo importante ya está hecho.</div>
 
   <h2>4 · Prototipos</h2>
@@ -102,26 +325,140 @@ gantt
   <p>Evolución: el prototipo era <strong>descartable</strong> (borrador) → el cliente no entendía por qué se tiraba → pasaron a ser <strong>evolutivos</strong> (se refinan, no se descartan).</p>
 
   <h2>5 · Evolutivo</h2>
-  <p>Ciclos que enlazan especificación, desarrollo y validación. Cada ciclo genera un sistema completo.</p>
-  <pre class="mermaid">
-flowchart LR
-    S[Sistema inicial<br/>rápido] --> U[Uso del cliente]
-    U --> F[Feedback]
-    F --> C[Ciclo 2]
-    C --> U2[Uso del cliente]
-    U2 --> F2[Feedback]
-    F2 --> C3[Ciclo 3 ...]
-  </pre>
+  <p>Ciclos que enlazan especificación, desarrollo y validación. Cada ciclo genera un sistema completo que el cliente puede operar — se refina con feedback en el siguiente ciclo.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 1220 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modelo evolutivo">
+      <defs>
+        <linearGradient id="e-box" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#58a6ff"/><stop offset="1" stop-color="#1d4ed8"/>
+        </linearGradient>
+        <marker id="e-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+        </marker>
+      </defs>
+      <style>
+        .eb { fill:url(#e-box); stroke:#1f6feb; }
+        .et { fill:#fff; font:600 12px "Segoe UI",sans-serif; text-anchor:middle; }
+        .el { stroke:#8b949e; stroke-width:1.5; fill:none; }
+        .es { fill:#e6edf3; font:600 13px "Segoe UI",sans-serif; }
+        .enote { fill:#8b949e; font:italic 12px "Segoe UI",sans-serif; }
+        .etag { fill:#58a6ff; font:600 11px "Segoe UI",sans-serif; }
+      </style>
+
+      <g transform="translate(20,40)">
+        <text class="etag" x="0" y="-8">CICLO 1</text>
+        <rect class="eb" x="0"   y="0" width="150" height="42" rx="6"/><text class="et" x="75"  y="19">Análisis y</text><text class="et" x="75" y="33">Especificación</text>
+        <rect class="eb" x="160" y="0" width="110" height="42" rx="6"/><text class="et" x="215" y="26">Diseño</text>
+        <rect class="eb" x="280" y="0" width="130" height="42" rx="6"/><text class="et" x="345" y="26">Codificación</text>
+        <rect class="eb" x="420" y="0" width="110" height="42" rx="6"/><text class="et" x="475" y="26">Pruebas</text>
+        <rect class="eb" x="540" y="0" width="130" height="42" rx="6"/><text class="et" x="605" y="26">Integración</text>
+        <rect class="eb" x="680" y="0" width="170" height="42" rx="6"/><text class="et" x="765" y="19">Operación y</text><text class="et" x="765" y="33">mantenimiento</text>
+        <path class="el" d="M860,21 H940" marker-end="url(#e-arr)"/>
+        <text class="es" x="948" y="26">Sistema v1</text>
+      </g>
+
+      <g transform="translate(130,130)">
+        <text class="etag" x="0" y="-8">CICLO 2</text>
+        <rect class="eb" x="0"   y="0" width="150" height="42" rx="6"/><text class="et" x="75"  y="19">Análisis y</text><text class="et" x="75" y="33">Especificación</text>
+        <rect class="eb" x="160" y="0" width="110" height="42" rx="6"/><text class="et" x="215" y="26">Diseño</text>
+        <rect class="eb" x="280" y="0" width="130" height="42" rx="6"/><text class="et" x="345" y="26">Codificación</text>
+        <rect class="eb" x="420" y="0" width="110" height="42" rx="6"/><text class="et" x="475" y="26">Pruebas</text>
+        <rect class="eb" x="540" y="0" width="80"  height="42" rx="6"/><text class="et" x="580" y="26">…</text>
+        <path class="el" d="M625,21 H720" marker-end="url(#e-arr)"/>
+        <text class="es" x="728" y="26">Sistema v2</text>
+      </g>
+
+      <g transform="translate(260,220)">
+        <text class="etag" x="0" y="-8">CICLO 3</text>
+        <rect class="eb" x="0"   y="0" width="150" height="42" rx="6"/><text class="et" x="75"  y="19">Análisis y</text><text class="et" x="75" y="33">Especificación</text>
+        <rect class="eb" x="160" y="0" width="110" height="42" rx="6"/><text class="et" x="215" y="26">Diseño</text>
+        <rect class="eb" x="280" y="0" width="80"  height="42" rx="6"/><text class="et" x="320" y="26">…</text>
+        <path class="el" d="M365,21 H460" marker-end="url(#e-arr)"/>
+        <text class="es" x="468" y="26">Sistema v3</text>
+      </g>
+
+      <text class="enote" x="20" y="295">Cada ciclo = especificación + desarrollo + validación completos. El feedback alimenta al siguiente ciclo.</text>
+    </svg>
+    <figcaption>Los ciclos se encadenan; cada uno entrega un sistema completo y operable que evoluciona con el feedback.</figcaption>
+  </figure>
   <blockquote>Útil cuando hay desconocimiento, urgencia extrema o entorno cambiante.</blockquote>
 
   <h2>6 · RUP — Rational Unified Process</h2>
-  <p>Asociado a <strong>UML</strong>. Propuesto por Jacobson, Booch y Rumbaugh. Modelo <strong>iterativo e incremental</strong>.</p>
-  <pre class="mermaid">
-flowchart LR
-    I[1 · Inicio<br/>procesos de negocio<br/>actores] --> E[2 · Elaboración<br/>arquitectura<br/>casos de uso]
-    E --> C[3 · Construcción<br/>diseño, código, pruebas]
-    C --> T[4 · Transición<br/>entorno real]
-  </pre>
+  <p>Asociado a <strong>UML</strong>. Propuesto por Jacobson, Booch y Rumbaugh. Modelo <strong>iterativo e incremental</strong>: las columnas son las 4 fases, las filas son las disciplinas, y las jorobas indican la intensidad de cada disciplina en cada iteración.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de jorobas de RUP">
+      <style>
+        .rhdr { fill:#161b22; stroke:#30363d; }
+        .rhdrTxt { fill:#e6edf3; font:700 13px "Segoe UI",sans-serif; text-anchor:middle; }
+        .rpdiv { stroke:#30363d; stroke-dasharray:4 4; stroke-width:1; }
+        .ridiv { stroke:#21262d; stroke-width:0.75; }
+        .rpLbl { fill:#e6edf3; font:700 13px "Segoe UI",sans-serif; text-anchor:middle; }
+        .rgroup { fill:#3fb950; font:700 13px "Segoe UI",sans-serif; }
+        .rdisc { fill:#c9d1d9; font:12px "Segoe UI",sans-serif; }
+        .riter { fill:#8b949e; font:10px "Segoe UI",sans-serif; text-anchor:middle; }
+        .rhump { fill:#58a6ff; opacity:0.85; }
+        .rcap { fill:#e6edf3; font:600 14px "Segoe UI",sans-serif; text-anchor:middle; }
+      </style>
+
+      <rect class="rhdr" x="220" y="10" width="720" height="26"/>
+      <text class="rhdrTxt" x="580" y="28">Fases</text>
+
+      <text class="rpLbl" x="310" y="54">Inicio</text>
+      <text class="rpLbl" x="460" y="54">Elaboración</text>
+      <text class="rpLbl" x="640" y="54">Construcción</text>
+      <text class="rpLbl" x="850" y="54">Transición</text>
+
+      <line class="rpdiv" x1="380" y1="60" x2="380" y2="520"/>
+      <line class="rpdiv" x1="550" y1="60" x2="550" y2="520"/>
+      <line class="rpdiv" x1="760" y1="60" x2="760" y2="520"/>
+
+      <text class="rgroup" x="10" y="90">Disciplinas de Proceso</text>
+
+      <text class="rdisc" x="10" y="116">Modelado del Negocio</text>
+      <path class="rhump" d="M220,120 C270,80 340,70 400,100 C460,130 520,120 560,120 L940,120 L940,122 L220,122 Z"/>
+
+      <text class="rdisc" x="10" y="170">Requerimientos</text>
+      <path class="rhump" d="M220,170 C260,150 320,120 400,125 C480,132 520,155 580,165 L940,170 L940,172 L220,172 Z"/>
+
+      <text class="rdisc" x="10" y="220">Análisis y Diseño</text>
+      <path class="rhump" d="M220,220 C300,218 380,180 460,170 C540,165 600,200 680,215 L940,220 L940,222 L220,222 Z"/>
+
+      <text class="rdisc" x="10" y="270">Implementación</text>
+      <path class="rhump" d="M220,270 C320,270 420,268 520,240 C620,210 700,205 780,240 C850,260 900,270 940,270 L940,272 L220,272 Z"/>
+
+      <text class="rdisc" x="10" y="320">Test</text>
+      <path class="rhump" d="M220,320 C340,322 460,322 560,310 C660,295 720,280 800,270 C860,263 900,310 940,320 L940,322 L220,322 Z"/>
+
+      <text class="rdisc" x="10" y="370">Instalación</text>
+      <path class="rhump" d="M220,370 C380,372 540,372 700,368 C760,365 820,340 870,320 C900,308 920,360 940,370 L940,372 L220,372 Z"/>
+
+      <text class="rgroup" x="10" y="402">Disciplinas de Soporte</text>
+
+      <text class="rdisc" x="10" y="430">Adm. Configuración y Cambios</text>
+      <path class="rhump" d="M220,440 C360,435 520,438 680,435 C800,433 900,438 940,440 L940,442 L220,442 Z"/>
+
+      <text class="rdisc" x="10" y="470">Administración del Proyecto</text>
+      <path class="rhump" d="M220,480 C360,475 520,478 680,476 C800,474 900,478 940,480 L940,482 L220,482 Z"/>
+
+      <text class="rdisc" x="10" y="510">Ambiente</text>
+      <path class="rhump" d="M220,520 C300,516 420,518 540,518 C700,518 820,520 940,520 L940,522 L220,522 Z"/>
+
+      <line class="ridiv" x1="220" y1="540" x2="940" y2="540"/>
+      <text class="riter" x="270" y="555">Iteraciones</text>
+      <text class="riter" x="270" y="568">preliminares</text>
+      <text class="riter" x="400" y="555">Iter. #1</text>
+      <text class="riter" x="460" y="555">Iter. #2</text>
+      <text class="riter" x="560" y="555">Iter. #n</text>
+      <text class="riter" x="620" y="555">Iter. #n+1</text>
+      <text class="riter" x="680" y="555">Iter. #n+2</text>
+      <text class="riter" x="800" y="555">Iter. #m</text>
+      <text class="riter" x="870" y="555">Iter. #m+1</text>
+
+      <rect class="rhdr" x="220" y="578" width="720" height="24"/>
+      <text class="rhdrTxt" x="580" y="595">Iteraciones</text>
+    </svg>
+    <figcaption>Cada fase contiene múltiples iteraciones; la intensidad de cada disciplina cambia según la fase.</figcaption>
+  </figure>
   <table>
     <thead><tr><th>Fase</th><th>Entregable clave</th></tr></thead>
     <tbody>
@@ -230,6 +567,38 @@ flowchart LR
       <div class="explain">Transición termina cuando el sistema funciona correctamente en producción.</div>
     </div>
   </div>
+
+  <h2>Preguntas tipo parcial</h2>
+  <details>
+    <summary><strong>P5 · Grafique a modo de ciclo de vida de entrega por etapas (incremental). Incluya ventajas y desventajas.</strong> <em>(2 puntos)</em></summary>
+    <div class="card accent">
+      <h3 style="margin-top:0">Respuesta modelo</h3>
+      <p>El modelo <strong>incremental</strong> (también llamado <em>entrega por etapas</em>) parte de una única especificación de requerimientos, descompone el sistema en sub-sistemas priorizados, y para cada uno ejecuta las etapas de <strong>diseño → codificación → pruebas → integración → entrega</strong>. Las etapas de distintos incrementos se <strong>solapan</strong> en el tiempo.</p>
+      <p><strong>Gráfico:</strong> ver el diagrama de la sección 3 — columna común de <em>Análisis y Especificación</em> a la izquierda, y filas desplazadas (una por sub-sistema) con las etapas de desarrollo que desembocan en la entrega parcial.</p>
+      <div class="grid">
+        <div class="card ok">
+          <h4 style="margin-top:0">Ventajas</h4>
+          <ul>
+            <li>Entregas tempranas: el cliente opera partes reales antes de terminar el sistema.</li>
+            <li>Permite priorizar: lo más crítico se entrega primero.</li>
+            <li>Retroalimentación temprana reduce desvíos grandes.</li>
+            <li>Menor riesgo de integración (se integra de a poco).</li>
+            <li>Permite paralelizar equipos sobre distintos incrementos.</li>
+          </ul>
+        </div>
+        <div class="card err">
+          <h4 style="margin-top:0">Desventajas</h4>
+          <ul>
+            <li>Exige sistemas <strong>descomponibles</strong> en partes operativas independientes.</li>
+            <li>La especificación inicial debe ser razonablemente estable.</li>
+            <li>La arquitectura global debe pensarse desde el comienzo (riesgo de mala arquitectura).</li>
+            <li>Gestión más compleja por entregas solapadas.</li>
+            <li>Costos repetidos de integración y pruebas de regresión.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
 
   <div class="keypoints">
     <h3>🔑 Ideas clave para el parcial</h3>
