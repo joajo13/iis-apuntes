@@ -106,11 +106,12 @@ flowchart LR
       A1((Solicita inscripción)) --> A2[Enviar solicitud]
     end
     subgraph SI [Sector de informes]
-      A2 --> S1{¿Hay cupo?}
+      S1{"¿Hay cupo?"}
       S1 -- No --> S2[Informar rechazo]
-      S1 -- Sí --> S3[Registrar inscripción]
+      S1 -- Si --> S3[Registrar inscripción]
       S3 --> S4[Emitir comprobante]
     end
+    A2 --> S1
     S2 --> F((Fin))
     S4 --> F
   </pre>

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIS — Parciales</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/theme.js" defer></script>
+<style>
+  .parcial-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .parcial-header h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+  }
+  .parcial-header h2::before { display: none; }
+  .parcial-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .parcial-section:first-of-type { border-top: none; margin-top: 1.5rem; }
+  .parcial-meta {
+    color: var(--text-disabled);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+  }
+  .preguntas { list-style: none; padding: 0; margin: 0; }
+  .preguntas > li {
+    border-left: 2px solid var(--border-strong);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    background: var(--bg-card);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    transition: border-color 0.2s;
+  }
+  .preguntas > li:hover { border-left-color: var(--accent); }
+  .pregunta-num {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+  .pregunta-texto {
+    color: var(--text);
+    font-size: 0.97rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.5;
+  }
+  .pregunta-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.65rem;
+  }
+  .chip-pts {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .chip-cap {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .chip-cap:hover { color: var(--accent); border-color: var(--accent); }
+  .parcial-total {
+    color: var(--text-disabled);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+  details.guia {
+    margin-top: 0.5rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+  }
+  details.guia summary {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  details.guia summary::before { font-size: 0.85rem; }
+  details.guia summary:hover { color: var(--accent); }
+  details.guia > div {
+    margin-top: 0.65rem;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  details.guia > div strong { color: var(--text); }
+  details.guia > div ul { padding-left: 1.25rem; margin: 0.4rem 0; }
+  details.guia > div li { margin: 0.25rem 0; }
+  details.guia > div li::marker { color: var(--accent); }
+  .chip-tag {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .chip-tag.tomado {
+    background: rgba(74,158,92,0.15);
+    color: var(--ok);
+    border: 1px solid var(--ok);
+  }
+  .chip-tag.simulacro {
+    background: rgba(245,158,11,0.12);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="crumb"><a href="index.html">IIS</a> · <strong>Parciales</strong></div>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="01-introduccion.html">01</a>
+    <a href="02-ciclos-de-vida.html">02</a>
+    <a href="03-metodologias-agiles.html">03</a>
+    <a href="04-extraccion-requerimientos.html">04</a>
+    <a href="05-procesos-de-negocio.html">05</a>
+    <a href="06-requerimientos.html">06</a>
+    <a href="07-especificacion.html">07</a>
+    <a href="practica.html">Práctica</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <span class="chip">IIS · UP · Facultad de Ingeniería · Palermo</span>
+    <h1>Parciales</h1>
+    <p class="sub">Parciales reales + simulacros de estilo equivalente. Expandí cada pregunta para ver una guía de respuesta con referencia al capítulo correspondiente.</p>
+  </div>
+
+  <!-- ========== PARCIAL A ========== -->
+  <section class="parcial-section">
+    <div class="parcial-header">
+      <span class="chip-tag tomado">Tomado</span>
+      <h2>Parcial A</h2>
+    </div>
+    <p class="parcial-meta">10 puntos totales · 6 preguntas</p>
+    <ol class="preguntas">
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">1.</span>¿Qué fue la crisis del software? Enuncie al menos tres roles del ingeniero de software.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Crisis del software:</strong> fenómeno de fines de los '60 donde los proyectos de software superaban presupuestos y plazos, eran de baja calidad y difíciles de mantener. Nombró la necesidad de una ingeniería formal. La conferencia de la OTAN en 1968 marca su origen oficial.
+            <br><br><strong>Roles del ingeniero de software (mencionar al menos 3):</strong>
+            <ul>
+              <li>Analista de requerimientos</li>
+              <li>Diseñador de sistemas</li>
+              <li>Programador / desarrollador</li>
+              <li>Tester / QA</li>
+              <li>Gestor de proyectos</li>
+              <li>Arquitecto de software</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">2.</span>Explique dos principios de la ingeniería de software.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            Elegir 2 de los 7 principios de Ghezzi y explicar cada uno con una oración y ejemplo:
+            <ul>
+              <li><strong>Rigor y formalidad:</strong> usar métodos rigurosos/formales para evitar ambigüedades.</li>
+              <li><strong>Separación de intereses:</strong> dividir el problema en partes independientes para gestionar la complejidad.</li>
+              <li><strong>Modularidad:</strong> descomponer el sistema en módulos cohesivos con bajo acoplamiento.</li>
+              <li><strong>Abstracción:</strong> ignorar detalles irrelevantes y centrarse en lo esencial según el nivel de análisis.</li>
+              <li><strong>Anticipación al cambio:</strong> diseñar pensando en que el software evolucionará.</li>
+              <li><strong>Generalidad:</strong> buscar soluciones generales que sirvan para más de un caso.</li>
+              <li><strong>Incrementalidad:</strong> construir el sistema de forma incremental y entregar valor en cada paso.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">3.</span>Explique una cualidad del producto y una cualidad del proceso.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Cualidades del producto</strong> (elegir 1): Confiabilidad, Eficiencia, Usabilidad, Mantenibilidad, Portabilidad, Reusabilidad, Interoperabilidad, Verificabilidad, Productividad (como cualidad percibida).
+            <br><br>
+            <strong>Cualidades del proceso</strong> (elegir 1): Productividad, Temporalidad, Visibilidad, Controlabilidad.
+            <br><br>
+            Para cada una: definir la cualidad, explicar qué mide y dar un ejemplo concreto.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">4.</span>Explique qué es un proceso de negocio. Explique qué herramientas se pueden utilizar para modelarlos.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="05-procesos-de-negocio.html">Cap. 05 — Procesos de negocio</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Proceso de negocio:</strong> conjunto de actividades interrelacionadas que transforman entradas en salidas generando valor para el cliente/organización. Tiene un inicio, un fin, actores y flujo definido.
+            <br><br>
+            <strong>Herramientas de modelado:</strong>
+            <ul>
+              <li><strong>Diagrama de actividad UML:</strong> muestra flujo de acciones, decisiones y paralelismo.</li>
+              <li><strong>BPMN 2.0 (Business Process Model and Notation):</strong> notación estándar con eventos, actividades, gateways y flujos de secuencia. Permite distinguir pools y lanes por actor.</li>
+              <li>Diagramas de flujo (Flowchart) — más simples, menos formales.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">5.</span>Grafique y explique los modelos de ciclos de vida: espiral, y el iterativo e incremental (modelo UP).</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="02-ciclos-de-vida.html">Cap. 02 — Ciclos de vida</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Espiral (Boehm):</strong> ciclo de 4 cuadrantes iterados: (1) Determinar objetivos y restricciones, (2) Evaluar alternativas e identificar riesgos, (3) Desarrollar y verificar el producto, (4) Planificar la próxima iteración. Centrado en la <em>gestión del riesgo</em>. Graficar espiral creciente con los 4 cuadrantes.
+            <br><br>
+            <strong>Iterativo e Incremental — UP (Unified Process):</strong> 4 fases secuenciales (Inicio, Elaboración, Construcción, Transición) donde cada fase contiene múltiples iteraciones. Las disciplinas (requerimientos, análisis, diseño, implementación, pruebas) se solapan en cada iteración con distinta intensidad (curvas). Cada iteración entrega un incremento funcional. Reducción de riesgo progresiva.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">6.</span>¿Qué es la ingeniería de requerimientos? Explique las actividades que la conforman.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="06-requerimientos.html">Cap. 06 — Requerimientos</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Ingeniería de requerimientos:</strong> proceso sistemático de descubrir, documentar, analizar y gestionar los requerimientos de un sistema de software.
+            <br><br>
+            <strong>Actividades principales:</strong>
+            <ul>
+              <li><strong>Elicitación:</strong> descubrir requerimientos con el cliente mediante entrevistas, cuestionarios, observación, etc.</li>
+              <li><strong>Análisis:</strong> detectar conflictos, ambigüedades e inconsistencias entre requerimientos.</li>
+              <li><strong>Especificación:</strong> documentar los requerimientos de forma clara, completa y verificable (SRS).</li>
+              <li><strong>Validación:</strong> confirmar con el cliente que los requerimientos reflejan sus necesidades reales.</li>
+              <li><strong>Gestión:</strong> controlar cambios en los requerimientos a lo largo del proyecto.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+    </ol>
+    <p class="parcial-total">Total: 10 puntos</p>
+  </section>
+
+  <!-- ========== PARCIAL B ========== -->
+  <section class="parcial-section">
+    <div class="parcial-header">
+      <span class="chip-tag tomado">Tomado</span>
+      <h2>Parcial B</h2>
+    </div>
+    <p class="parcial-meta">10 puntos totales · 6 preguntas</p>
+    <ol class="preguntas">
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">1.</span>¿Qué es la Ingeniería de Software?</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            Definición de la IEEE: <em>"Aplicación de un enfoque sistemático, disciplinado y cuantificable al desarrollo, operación y mantenimiento del software"</em>.
+            <br><br>
+            Complementar con: es una disciplina de ingeniería que aplica principios científicos e ingenieriles para producir software de calidad de forma predecible y eficiente, a diferencia de la programación artesanal.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">2.</span>¿Qué es la crisis del Software? ¿Qué tipos de preguntas puede contestar? Brinde 2 ejemplos de cada tipo.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Crisis del software:</strong> fenómeno de fines de los '60: proyectos con sobrecosto, fuera de plazo, baja calidad, incumplimiento de requerimientos. Motivó el nacimiento de la Ingeniería de Software (conferencia OTAN 1968).
+            <br><br>
+            <strong>Tipos de preguntas que la ingeniería de software puede contestar:</strong>
+            <ul>
+              <li><strong>Descriptivas</strong> (¿qué es? / ¿cómo es?): ej. ¿Cuántas líneas de código tiene el sistema? / ¿Cuántos defectos se encontraron en testing?</li>
+              <li><strong>Predictivas</strong> (¿qué pasará?): ej. ¿Cuánto tiempo tardará el desarrollo? / ¿Cuánto costará el mantenimiento?</li>
+              <li><strong>Prescriptivas</strong> (¿qué hacer?): ej. ¿Qué metodología usar? / ¿Qué técnica de testing aplicar?</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">3.</span>Explique la cualidad de Productividad y los principios de Rigor y Formalidad.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Productividad (cualidad del proceso):</strong> mide la eficiencia con la que el equipo produce software. Se puede cuantificar en líneas de código por hora, puntos función por mes, etc. Alta productividad significa más entregables con los mismos recursos.
+            <br><br>
+            <strong>Rigor y Formalidad (principio):</strong>
+            <ul>
+              <li><strong>Rigor:</strong> ser preciso y sistemático en todas las etapas, aunque sin llegar a la formalidad matemática total.</li>
+              <li><strong>Formalidad:</strong> usar notaciones matemáticas o formales para especificar el comportamiento del sistema con exactitud absoluta (ej. lógica formal, máquinas de estado). Es un nivel superior de rigor.</li>
+            </ul>
+            La formalidad elimina ambigüedades pero tiene alto costo; el rigor es el mínimo deseable en cualquier proyecto.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">4.</span>Según Frederick Brooks, en su artículo "No Silver Bullet", ¿cuáles son las dificultades esenciales y accidentales? Enuncie y explique brevemente las dificultades esenciales planteadas en el mismo.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Dificultades accidentales:</strong> propias de las herramientas y tecnologías del momento (lenguajes, compiladores, entornos). Mejoran con el avance tecnológico.
+            <br><br>
+            <strong>Dificultades esenciales:</strong> inherentes a la naturaleza del software, no eliminables por tecnología. Son 4:
+            <ul>
+              <li><strong>Complejidad:</strong> el software es el artefacto humano más complejo en proporción a su tamaño; sus partes no son repetibles como en hardware.</li>
+              <li><strong>Conformidad:</strong> el software debe adaptarse a entornos humanos e institucionales arbitrarios y cambiantes.</li>
+              <li><strong>Mutabilidad:</strong> el software es fácilmente modificable, por lo que constantemente se le piden cambios.</li>
+              <li><strong>Invisibilidad:</strong> el software no tiene representación visual geométrica natural; no se puede "ver" como un puente.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">5.</span>Grafique el modelo de ciclo de vida de entrega por etapas (incremental) e indique ventajas y desventajas.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="02-ciclos-de-vida.html">Cap. 02 — Ciclos de vida</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Modelo incremental:</strong> se definen todos los requerimientos al inicio y luego el sistema se construye y entrega en incrementos funcionales sucesivos. Cada incremento agrega funcionalidad al anterior.
+            <br><br>
+            <strong>Graficar:</strong> una línea de tiempo con bloques "Incremento 1", "Incremento 2", "Incremento N", cada uno con sus fases internas (análisis → diseño → código → test) y una entrega al final de cada uno.
+            <br><br>
+            <strong>Ventajas:</strong>
+            <ul>
+              <li>El cliente recibe valor antes de que el sistema esté completo.</li>
+              <li>Permite detectar errores de requerimientos temprano en incrementos pequeños.</li>
+              <li>Reduce riesgo de entrega total fallida.</li>
+            </ul>
+            <strong>Desventajas:</strong>
+            <ul>
+              <li>Requiere planificación cuidadosa de los incrementos y sus interfaces.</li>
+              <li>Puede acumular deuda técnica si la arquitectura no se diseña para escalar.</li>
+              <li>Los requerimientos deben estar razonablemente estables desde el inicio.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">6.</span>¿Qué es un requerimiento? Explique las diferencias entre requerimiento funcional y no funcional.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="06-requerimientos.html">Cap. 06 — Requerimientos</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Requerimiento:</strong> condición o capacidad que el sistema debe satisfacer para resolver un problema o alcanzar un objetivo del usuario/cliente. Es la base de todo desarrollo.
+            <br><br>
+            <strong>Requerimiento funcional:</strong> describe <em>qué</em> debe hacer el sistema: funciones, comportamientos, servicios. Ej.: "El sistema debe permitir al usuario iniciar sesión con email y contraseña."
+            <br><br>
+            <strong>Requerimiento no funcional:</strong> describe <em>cómo</em> debe comportarse el sistema: restricciones de calidad, performance, seguridad, usabilidad, etc. Ej.: "El sistema debe responder en menos de 2 segundos al 99% de las solicitudes."
+            <br><br>
+            Diferencia clave: los funcionales definen funcionalidades; los no funcionales definen restricciones de calidad sobre esas funcionalidades.
+          </div>
+        </details>
+      </li>
+
+    </ol>
+    <p class="parcial-total">Total: 10 puntos</p>
+  </section>
+
+  <!-- ========== PARCIAL C ========== -->
+  <section class="parcial-section">
+    <div class="parcial-header">
+      <span class="chip-tag simulacro">Simulacro</span>
+      <h2>Parcial C</h2>
+    </div>
+    <p class="parcial-meta">10 puntos totales · 6 preguntas · Estilo equivalente a parciales reales</p>
+    <ol class="preguntas">
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">1.</span>Defina ingeniería de software según la IEEE y mencione al menos tres roles que puede desempeñar un ingeniero de software.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Definición IEEE:</strong> "Aplicación de un enfoque sistemático, disciplinado y cuantificable al desarrollo, operación y mantenimiento del software."
+            <br><br>
+            <strong>Roles (mencionar al menos 3):</strong> Analista de requerimientos, Arquitecto de software, Diseñador, Programador/Desarrollador, Tester/QA, Gestor de proyectos, Administrador de base de datos, Ingeniero de seguridad.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">2.</span>Explique los principios de <strong>Anticipación al cambio</strong> y <strong>Separación de intereses</strong>. Dé un ejemplo de cada uno.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Anticipación al cambio:</strong> diseñar el software sabiendo que los requerimientos evolucionarán. Se usan técnicas como parametrización, interfaces, módulos intercambiables. Ej.: diseñar la capa de acceso a datos con una interfaz para poder cambiar la base de datos sin modificar la lógica de negocio.
+            <br><br>
+            <strong>Separación de intereses:</strong> atacar distintos aspectos del problema en momentos o módulos separados, sin mezclarlos. Ej.: separar la lógica de negocio de la presentación (MVC); separar el análisis de rendimiento del análisis funcional.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">3.</span>Compare el modelo en cascada con el modelo en espiral. Grafique ambos e indique una ventaja y una desventaja de cada uno.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="02-ciclos-de-vida.html">Cap. 02 — Ciclos de vida</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Cascada:</strong> fases secuenciales (Requerimientos → Diseño → Implementación → Verificación → Mantenimiento). Cada fase produce un entregable y no se avanza sin terminarla.
+            <ul>
+              <li>Ventaja: simple, fácil de gestionar, buena documentación.</li>
+              <li>Desventaja: no tolera cambios tardíos; el cliente no ve el producto hasta el final.</li>
+            </ul>
+            <strong>Espiral (Boehm):</strong> ciclos repetidos de 4 cuadrantes: objetivos → riesgos → desarrollo → planificación. Orientado a la gestión del riesgo.
+            <ul>
+              <li>Ventaja: manejo explícito del riesgo; permite adaptarse a cambios en cada vuelta.</li>
+              <li>Desventaja: complejo de gestionar; requiere experiencia para evaluar riesgos; costo alto.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">4.</span>¿Qué es Scrum? Enuncie los 3 roles, los artefactos principales y los eventos del framework.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="03-metodologias-agiles.html">Cap. 03 — Metodologías ágiles</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Scrum:</strong> framework ágil para gestionar proyectos complejos con entregas iterativas llamadas Sprints (1-4 semanas).
+            <br><br>
+            <strong>3 Roles:</strong>
+            <ul>
+              <li><strong>Product Owner:</strong> representa al cliente, prioriza el Product Backlog.</li>
+              <li><strong>Scrum Master:</strong> facilita el proceso, elimina impedimentos, protege al equipo.</li>
+              <li><strong>Development Team:</strong> equipo autogestionado que construye el incremento.</li>
+            </ul>
+            <strong>Artefactos:</strong> Product Backlog, Sprint Backlog, Incremento.
+            <br><br>
+            <strong>Eventos:</strong> Sprint Planning, Daily Scrum (standup diario), Sprint Review, Sprint Retrospective.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">5.</span>Explique las tres técnicas de extracción de requerimientos vistas en la materia. ¿Cuándo conviene usar cada una?</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="04-extraccion-requerimientos.html">Cap. 04 — Extracción de requerimientos</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <ul>
+              <li><strong>Entrevista:</strong> conversación directa con el stakeholder. Conviene cuando se necesita profundidad, explorar motivaciones o clarificar ambigüedades. Permite preguntas abiertas y seguimiento de respuestas.</li>
+              <li><strong>Cuestionario / Encuesta:</strong> preguntas escritas distribuidas a múltiples usuarios. Conviene cuando hay muchos stakeholders geográficamente dispersos y se quieren datos cuantitativos o tendencias generales.</li>
+              <li><strong>Observación directa (etnografía):</strong> el analista observa al usuario en su entorno de trabajo. Conviene para descubrir requerimientos implícitos o comportamientos que el usuario no sabe verbalizar ("lo hago sin pensar").</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">6.</span>¿Qué es BPMN 2.0? Mencione al menos cuatro elementos de la notación y para qué se usan.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="05-procesos-de-negocio.html">Cap. 05 — Procesos de negocio</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>BPMN 2.0 (Business Process Model and Notation):</strong> estándar internacional para modelar procesos de negocio de forma gráfica, legible tanto por técnicos como por stakeholders de negocio.
+            <br><br>
+            <strong>Elementos (mencionar al menos 4):</strong>
+            <ul>
+              <li><strong>Evento (círculo):</strong> algo que ocurre: inicio (verde), intermedio, fin (rojo).</li>
+              <li><strong>Actividad / Tarea (rectángulo redondeado):</strong> trabajo a realizar por un actor.</li>
+              <li><strong>Gateway (rombo):</strong> punto de decisión o bifurcación del flujo (exclusivo XOR, paralelo AND, inclusivo OR).</li>
+              <li><strong>Flujo de secuencia (flecha sólida):</strong> orden de ejecución entre elementos.</li>
+              <li><strong>Pool:</strong> representa un participante/organización en el proceso.</li>
+              <li><strong>Lane (carril):</strong> subdivide un pool por rol o departamento responsable.</li>
+              <li><strong>Flujo de mensaje (flecha punteada):</strong> comunicación entre pools distintos.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+    </ol>
+    <p class="parcial-total">Total: 10 puntos</p>
+  </section>
+
+  <!-- ========== PARCIAL D ========== -->
+  <section class="parcial-section">
+    <div class="parcial-header">
+      <span class="chip-tag simulacro">Simulacro</span>
+      <h2>Parcial D</h2>
+    </div>
+    <p class="parcial-meta">10 puntos totales · 6 preguntas · Estilo equivalente a parciales reales</p>
+    <ol class="preguntas">
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">1.</span>¿Qué fue la crisis del software? Enuncie tres causas y tres consecuencias.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Causas:</strong>
+            <ul>
+              <li>Crecimiento exponencial de la complejidad del software.</li>
+              <li>Falta de metodologías y técnicas formales de desarrollo.</li>
+              <li>Subestimación de tiempos y costos; gestión artesanal.</li>
+            </ul>
+            <strong>Consecuencias:</strong>
+            <ul>
+              <li>Proyectos entregados fuera de plazo y con sobrecosto.</li>
+              <li>Software de baja calidad con muchos defectos.</li>
+              <li>Sistemas que no satisfacían los requerimientos del cliente.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">2.</span>Explique la diferencia entre cualidades internas y externas del producto. Dé un ejemplo de cada una.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Cualidades externas:</strong> perceptibles por el usuario final durante el uso del sistema. Ej.: Usabilidad ("la interfaz es intuitiva"), Confiabilidad ("el sistema no falla"), Eficiencia ("responde rápido").
+            <br><br>
+            <strong>Cualidades internas:</strong> perceptibles solo por desarrolladores al analizar el código o la arquitectura. Ej.: Legibilidad del código, Mantenibilidad, Testeabilidad, Reusabilidad de componentes.
+            <br><br>
+            Relación: las cualidades internas son condición necesaria para las externas (código legible → más fácil de mantener → sistema más confiable).
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">3.</span>Grafique y explique el modelo iterativo e incremental (UP). Indique sus 4 fases y las disciplinas más importantes.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="02-ciclos-de-vida.html">Cap. 02 — Ciclos de vida</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>4 Fases del UP:</strong>
+            <ul>
+              <li><strong>Inicio (Inception):</strong> definir el alcance, viabilidad y estimación inicial. Entregable: documento de visión.</li>
+              <li><strong>Elaboración:</strong> arquitectura base, mitigar riesgos principales, detallar requerimientos críticos.</li>
+              <li><strong>Construcción:</strong> implementar la mayoría de la funcionalidad en iteraciones. Producto mayormente completo.</li>
+              <li><strong>Transición:</strong> deploy, pruebas de aceptación, capacitación, ajustes finales.</li>
+            </ul>
+            <strong>Disciplinas:</strong> Requerimientos, Análisis y Diseño, Implementación, Pruebas, Despliegue, Gestión de configuración, Gestión de proyectos, Entorno.
+            <br><br>
+            Cada disciplina tiene distinta intensidad por fase (representada con curvas de campana en el diagrama).
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">4.</span>Explique el Manifiesto Ágil: sus 4 valores y al menos 4 de sus 12 principios.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="03-metodologias-agiles.html">Cap. 03 — Metodologías ágiles</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>4 Valores:</strong>
+            <ul>
+              <li>Individuos e interacciones <em>sobre</em> procesos y herramientas.</li>
+              <li>Software funcionando <em>sobre</em> documentación exhaustiva.</li>
+              <li>Colaboración con el cliente <em>sobre</em> negociación contractual.</li>
+              <li>Respuesta al cambio <em>sobre</em> seguir un plan.</li>
+            </ul>
+            <strong>Principios (mencionar al menos 4):</strong>
+            <ul>
+              <li>Entrega temprana y continua de software con valor.</li>
+              <li>Bienvenida a los cambios en requerimientos, incluso tardíos.</li>
+              <li>Entrega frecuente de software funcional (semanas, no meses).</li>
+              <li>El software funcionando es la principal medida de progreso.</li>
+              <li>Los equipos autogestionados producen las mejores arquitecturas.</li>
+              <li>Reflexión periódica del equipo para mejorar su forma de trabajar.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">5.</span>¿Qué es un proceso de negocio? Grafique un ejemplo simple usando diagrama de actividad UML o BPMN.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="05-procesos-de-negocio.html">Cap. 05 — Procesos de negocio</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Proceso de negocio:</strong> conjunto de actividades interrelacionadas, realizadas por actores, que transforman entradas en salidas con valor para el cliente u organización. Tiene inicio, fin, flujo definido y responsables.
+            <br><br>
+            <strong>Ejemplo a graficar (compra online):</strong>
+            <ol>
+              <li>Inicio → Cliente selecciona producto → Agrega al carrito → Ingresa datos de pago → [Gateway XOR] ¿Pago aprobado? → Sí: confirma pedido → Notifica al depósito → Fin. No: muestra error → Fin.</li>
+            </ol>
+            En UML de actividad: nodo inicial (círculo relleno), actividades (rectángulos redondeados), decisiones (rombo), nodo final (círculo con borde). En BPMN: eventos de inicio/fin, tareas, gateway exclusivo.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">6.</span>Enuncie y explique los atributos de un buen SRS según la IEEE 830. Explique qué es el criterio SMART aplicado a requerimientos.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="07-especificacion.html">Cap. 07 — Especificación (SRS)</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Atributos de un buen SRS (IEEE 830):</strong>
+            <ul>
+              <li><strong>Correcto:</strong> refleja fielmente lo que el cliente necesita.</li>
+              <li><strong>No ambiguo:</strong> cada requerimiento tiene una única interpretación.</li>
+              <li><strong>Completo:</strong> incluye todos los requerimientos relevantes y define respuestas a todas las entradas.</li>
+              <li><strong>Consistente:</strong> sin contradicciones entre requerimientos.</li>
+              <li><strong>Verificable:</strong> cada requerimiento es testeable con criterio objetivo.</li>
+              <li><strong>Modificable:</strong> estructura clara que permite cambiar requerimientos sin inconsistencias.</li>
+              <li><strong>Trazable:</strong> cada requerimiento tiene origen identificable y se puede rastrear en el diseño/código.</li>
+            </ul>
+            <strong>Criterio SMART:</strong> Específico (Specific), Medible (Measurable), Alcanzable (Achievable), Relevante (Relevant), con plazo (Time-bound). Se aplica para escribir requerimientos claros y verificables.
+          </div>
+        </details>
+      </li>
+
+    </ol>
+    <p class="parcial-total">Total: 10 puntos</p>
+  </section>
+
+  <!-- ========== PARCIAL E ========== -->
+  <section class="parcial-section">
+    <div class="parcial-header">
+      <span class="chip-tag simulacro">Simulacro</span>
+      <h2>Parcial E</h2>
+    </div>
+    <p class="parcial-meta">10 puntos totales · 6 preguntas · Estilo equivalente a parciales reales</p>
+    <ol class="preguntas">
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">1.</span>¿Qué es la Ingeniería de Software? Mencione dos cualidades del producto y dos del proceso.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Definición:</strong> disciplina de ingeniería que aplica métodos sistemáticos para desarrollar, operar y mantener software de calidad de forma eficiente y predecible (IEEE).
+            <br><br>
+            <strong>Cualidades del producto (elegir 2):</strong> Confiabilidad, Eficiencia, Usabilidad, Mantenibilidad, Portabilidad, Reusabilidad, Interoperabilidad, Verificabilidad.
+            <br><br>
+            <strong>Cualidades del proceso (elegir 2):</strong> Productividad, Temporalidad (cumplir plazos), Visibilidad (estado conocido), Controlabilidad.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">2.</span>Explique el principio de <strong>Rigor y Formalidad</strong> y el principio de <strong>Modularidad</strong>.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">1 pto</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Rigor y Formalidad:</strong> ser preciso y sistemático. El rigor es el mínimo indispensable; la formalidad es rigor con notación matemática exacta. Evitan ambigüedades que generen defectos.
+            <br><br>
+            <strong>Modularidad:</strong> descomponer el sistema en partes (módulos) con alta cohesión interna y bajo acoplamiento entre sí. Facilita el desarrollo paralelo, el testing aislado y el mantenimiento. Ej.: separar módulo de autenticación del módulo de pagos.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">3.</span>Según Brooks en "No Silver Bullet", ¿cuáles son las dificultades accidentales? Explique dos de ellas.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="01-introduccion.html">Cap. 01 — Introducción</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Dificultades accidentales:</strong> surgen de las limitaciones de las herramientas y tecnologías disponibles en un momento dado. A diferencia de las esenciales, <em>pueden</em> reducirse o eliminarse con mejoras tecnológicas.
+            <br><br>
+            Ejemplos (Brooks menciona mejoras ya logradas en su época):
+            <ul>
+              <li><strong>Lenguajes de alto nivel:</strong> en los '50 el ensamblador era accidental; los lenguajes de alto nivel lo resolvieron parcialmente.</li>
+              <li><strong>Time-sharing / entornos interactivos:</strong> antes los ciclos de compilación eran lentos (batch); la interactividad los acortó.</li>
+              <li><strong>Entornos de programación integrados (IDEs):</strong> reducen la complejidad de usar múltiples herramientas separadas.</li>
+            </ul>
+            Punto clave: ya que las accidentales están en gran parte resueltas, no hay "bala de plata" porque las <em>esenciales</em> siguen existiendo.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">4.</span>Compare XP (Extreme Programming) con Scrum. Indique 3 prácticas de XP y cómo se diferencian del enfoque de Scrum.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="03-metodologias-agiles.html">Cap. 03 — Metodologías ágiles</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>XP (Kent Beck):</strong> metodología ágil con foco en prácticas de ingeniería técnica. Iteraciones cortas (1-2 semanas).
+            <br><br>
+            <strong>3 prácticas de XP:</strong>
+            <ul>
+              <li><strong>Pair Programming:</strong> dos desarrolladores en una computadora. Scrum no prescribe cómo trabajar internamente.</li>
+              <li><strong>TDD (Test-Driven Development):</strong> escribir el test antes que el código. Scrum no define prácticas técnicas.</li>
+              <li><strong>Integración continua:</strong> integrar y probar código varias veces al día. Scrum no lo requiere explícitamente.</li>
+              <li><strong>Refactoring continuo:</strong> mejorar el código constantemente sin cambiar comportamiento.</li>
+              <li><strong>Releases pequeños y frecuentes:</strong> similar a Scrum pero con más frecuencia aún.</li>
+            </ul>
+            <strong>Diferencia clave:</strong> XP prescribe <em>cómo</em> desarrollar (prácticas técnicas específicas); Scrum define <em>cómo gestionar</em> el trabajo (roles, eventos, artefactos) pero no las prácticas de ingeniería.
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">5.</span>Explique los tipos de requerimientos (funcionales, no funcionales, de dominio) y enumere 4 defectos comunes en la elicitación.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="06-requerimientos.html">Cap. 06 — Requerimientos</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Tipos:</strong>
+            <ul>
+              <li><strong>Funcionales:</strong> definen qué debe hacer el sistema: funciones, comportamientos, servicios. Ej.: "El sistema debe generar facturas en PDF."</li>
+              <li><strong>No funcionales:</strong> restricciones de calidad sobre cómo debe operar. Ej.: "El tiempo de respuesta no debe superar 1 segundo."</li>
+              <li><strong>De dominio:</strong> restricciones impuestas por el dominio de negocio o regulaciones externas. Ej.: "La tasa de IVA aplicada debe ser del 21% según la ley fiscal vigente."</li>
+            </ul>
+            <strong>4 defectos comunes en la elicitación:</strong>
+            <ul>
+              <li>Ambigüedad: términos con más de una interpretación.</li>
+              <li>Incompletitud: requerimientos que no cubren todos los escenarios posibles.</li>
+              <li>Inconsistencia: requerimientos que se contradicen entre sí.</li>
+              <li>Ruido: información irrelevante mezclada con requerimientos reales.</li>
+              <li>Sobre-especificación: incluir decisiones de diseño en lugar de necesidades.</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <p class="pregunta-texto"><span class="pregunta-num">6.</span>¿Qué secciones debe contener un SRS según IEEE 830? Explique brevemente cada una.</p>
+        <div class="pregunta-chips">
+          <span class="chip-pts">2 ptos</span>
+          <a class="chip-cap" href="07-especificacion.html">Cap. 07 — Especificación (SRS)</a>
+        </div>
+        <details class="guia">
+          <summary>Ver guía de respuesta</summary>
+          <div>
+            <strong>Secciones del SRS (IEEE 830):</strong>
+            <ul>
+              <li><strong>1. Introducción:</strong> propósito del documento, alcance del sistema, definiciones/acrónimos, referencias y visión general del documento.</li>
+              <li><strong>2. Descripción general:</strong> perspectiva del producto, funciones del producto, características de los usuarios, restricciones generales, supuestos y dependencias.</li>
+              <li><strong>3. Requerimientos específicos:</strong> requerimientos funcionales (detallados), requerimientos no funcionales (rendimiento, seguridad, usabilidad), requerimientos de interfaz (usuario, hardware, software, comunicaciones).</li>
+            </ul>
+            Cada sección debe ser consistente con las otras. Los requerimientos funcionales suelen organizarse por función, caso de uso o clase de usuario.
+          </div>
+        </details>
+      </li>
+
+    </ol>
+    <p class="parcial-total">Total: 10 puntos</p>
+  </section>
+
+  <p style="color:var(--text-disabled);margin-top:4rem;font-size:0.75rem;text-align:center;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em">
+    IIS · UP · 2026 — Parciales A y B: tomados. C, D y E: simulacros de estilo equivalente.
+  </p>
+</div>
+</body>
+</html>
