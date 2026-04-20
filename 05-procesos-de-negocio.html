@@ -59,14 +59,14 @@
   <h3>Ejemplo: consulta de cursos con carriles</h3>
   <pre class="mermaid">
 flowchart TD
-    start((●)) --> A[Interesado consulta]
+    S((Inicio)) --> A[Interesado consulta]
     A --> F{{fork}}
     F --> B[Verificar cursos disponibles]
     F --> C[Verificar horarios]
     B --> J{{join}}
     C --> J
     J --> D[Entregar info al interesado]
-    D --> E(((◉)))
+    D --> E((Fin))
   </pre>
   <div class="card accent">Los <strong>carriles</strong> (swimlanes) dividen en columnas — cada columna = un responsable.</div>
 
@@ -102,14 +102,14 @@ flowchart TD
   <h3>Ejemplo BPMN: inscripción a un curso</h3>
   <pre class="mermaid">
 flowchart LR
-    subgraph Alumno
-    A1((Solicita inscripción)) --> A2[Enviar solicitud]
+    subgraph AL [Alumno]
+      A1((Solicita inscripción)) --> A2[Enviar solicitud]
     end
-    subgraph Sector de informes
-    A2 --> S1{¿Hay cupo?}
-    S1 -- No --> S2[Informar rechazo]
-    S1 -- Sí --> S3[Registrar inscripción]
-    S3 --> S4[Emitir comprobante]
+    subgraph SI [Sector de informes]
+      A2 --> S1{¿Hay cupo?}
+      S1 -- No --> S2[Informar rechazo]
+      S1 -- Sí --> S3[Registrar inscripción]
+      S3 --> S4[Emitir comprobante]
     end
     S2 --> F((Fin))
     S4 --> F

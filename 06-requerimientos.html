@@ -32,10 +32,10 @@
   <h2>Ingeniería de requerimientos — proceso completo</h2>
   <pre class="mermaid">
 flowchart LR
-    E[1 · Extracción<br/>entrevistas<br/>cuestionarios<br/>observación] --> A[2 · Análisis<br/>procesar info]
-    A --> S[3 · Especificación<br/>documentar formalmente]
-    S --> V[4 · Validación<br/>cliente confirma]
-    V -.cambios.-> E
+    E["1 · Extracción&lt;br/&gt;entrevistas&lt;br/&gt;cuestionarios&lt;br/&gt;observación"] --> A["2 · Análisis&lt;br/&gt;procesar info"]
+    A --> S["3 · Especificación&lt;br/&gt;documentar formalmente"]
+    S --> V["4 · Validación&lt;br/&gt;cliente confirma"]
+    V -. cambios .-> E
   </pre>
 
   <h2>¿Por qué hacerla? Los números asustan</h2>
@@ -69,12 +69,12 @@ flowchart LR
   <p>Antes de arrancar hay que definir <strong>qué entra y qué no</strong> en el sistema. No es arbitrario: influyen factores técnicos y económicos.</p>
   <pre class="mermaid">
 flowchart TB
-    subgraph Contexto
-    subgraph Sistema
-    A[Funciones<br/>incluidas]
-    end
-    X[Áreas grises<br/>⚠️ minimizar]
-    Y[Fuera del alcance]
+    subgraph CTX [Contexto]
+      subgraph SYS [Sistema]
+        A["Funciones&lt;br/&gt;incluidas"]
+      end
+      X["Áreas grises&lt;br/&gt;⚠️ minimizar"]
+      Y[Fuera del alcance]
     end
   </pre>
 
