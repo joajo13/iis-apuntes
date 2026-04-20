@@ -6,6 +6,7 @@
 <title>07 · Especificación (SRS) — IIS</title>
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="assets/theme.js" defer></script>
 </head>
@@ -265,7 +266,7 @@ flowchart LR
 </div>
 <script src="assets/app.js"></script>
 <script>
-mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+
 Chart.defaults.color = '#e6edf3';
 Chart.defaults.borderColor = '#30363d';
 new Chart(document.getElementById('srsRadar'), {
