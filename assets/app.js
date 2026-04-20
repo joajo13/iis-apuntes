@@ -158,11 +158,13 @@
 
 // Tabs + Quiz + Flashcards
 document.addEventListener('click', e => {
-  if (e.target.matches('.tab-btn')) {
+  if (e.target.matches('.tab-btn') && e.target.dataset.tab) {
     const tabs = e.target.closest('.tabs');
     const key = e.target.dataset.tab;
-    tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === e.target));
-    tabs.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.tab === key));
+    // Limitar a los botones/paneles directos de este grupo de tabs
+    // (evita pisar sub-tabs como el filtro de flashcards que usa .tab-btn con data-ch).
+    tabs.querySelectorAll(':scope > .tab-buttons > .tab-btn').forEach(b => b.classList.toggle('active', b === e.target));
+    tabs.querySelectorAll(':scope > .tab-panel').forEach(p => p.classList.toggle('active', p.dataset.tab === key));
   }
   // Quiz
   if (e.target.matches('.opt')) {
