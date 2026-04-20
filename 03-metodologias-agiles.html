@@ -48,11 +48,11 @@
   <p>El cliente describe sus necesidades como <strong>historias de usuario</strong> (no lista de features). Ciclo:</p>
   <pre class="mermaid">
 flowchart LR
-    H["1 · Seleccionar&lt;br/&gt;historias"] --> T["2 · Dividir&lt;br/&gt;en tareas"]
-    T --> P["3 · Planificar&lt;br/&gt;entrega"]
-    P --> D["4 · Desarrollar&lt;br/&gt;integrar, probar"]
+    H[1 · Seleccionar historias] --> T[2 · Dividir en tareas]
+    T --> P[3 · Planificar entrega]
+    P --> D[4 · Desarrollar e integrar]
     D --> E[5 · Entregar]
-    E --> V["6 · Evaluación&lt;br/&gt;del cliente"]
+    E --> V[6 · Evaluacion del cliente]
     V --> H
   </pre>
 
@@ -60,9 +60,9 @@ flowchart LR
   <p>Foco: agregar valor al negocio en el <strong>menor tiempo posible</strong>. El proyecto avanza en <strong>sprints</strong> (1–4 semanas).</p>
   <pre class="mermaid">
 flowchart LR
-    PB["Product Backlog&lt;br/&gt;requisitos priorizados"] --> SP[Sprint Planning]
+    PB[Product Backlog] --> SP[Sprint Planning]
     SP --> SB[Sprint Backlog]
-    SB --> S["Sprint&lt;br/&gt;1-4 semanas"]
+    SB --> S[Sprint 1-4 sem.]
     S --> DM[Daily Meeting]
     DM --> S
     S --> D[Demo / Review]

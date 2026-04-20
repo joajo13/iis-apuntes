@@ -82,10 +82,10 @@
   <h2>Criterio SMART para requerimientos no funcionales</h2>
   <pre class="mermaid">
 flowchart LR
-    S["S · Specific&lt;br/&gt;Específico"] --> M["M · Measurable&lt;br/&gt;Medible"]
-    M --> A["A · Attainable&lt;br/&gt;Alcanzable"]
-    A --> R["R · Realizable&lt;br/&gt;Realizable"]
-    R --> T["T · Traceable&lt;br/&gt;Rastreable"]
+    S[S · Especifico] --> M[M · Medible]
+    M --> A[A · Alcanzable]
+    A --> R[R · Realizable]
+    R --> T[T · Rastreable]
   </pre>
   <table>
     <thead><tr><th>Letra</th><th>Significa</th><th>Descripción</th></tr></thead>
@@ -117,10 +117,10 @@ flowchart LR
   <h2>Gestión y evolución de requerimientos</h2>
   <pre class="mermaid">
 flowchart LR
-    E["Especificación&lt;br/&gt;versión N"] --> G["Gestión&lt;br/&gt;revisiones regulares"]
-    G --> V["Validación&lt;br/&gt;cliente confirma"]
-    V --> C{¿Cambios?}
-    C -- Sí --> U["Actualizar SRS&lt;br/&gt;nueva versión"]
+    E[Especificacion v.N] --> G[Gestion / revisiones]
+    G --> V[Validacion]
+    V --> C{Cambios?}
+    C -- Si --> U[Actualizar SRS]
     U --> E
     C -- No --> F[Estable]
   </pre>
