@@ -16,11 +16,11 @@
   --text: #ffffff;
   --text-dim: #999999;
   --text-disabled: #666666;
-  --accent: #d71921;
+  --accent: #f59e0b;
   --accent-2: #ffffff;
   --ok: #4a9e5c;
   --warn: #d2a915;
-  --err: #d71921;
+  --err: #ef4444;
   --success: #00c758;
   --code-bg: #0a0a0a;
   --radius: 12px;
@@ -682,11 +682,11 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   --text: #111111;
   --text-dim: #555555;
   --text-disabled: #888888;
-  --accent: #d71921;
+  --accent: #b45309;
   --accent-2: #111111;
   --ok: #1f8a3b;
   --warn: #b8860b;
-  --err: #d71921;
+  --err: #b91c1c;
   --code-bg: #f0f0f0;
 }
 
@@ -701,7 +701,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 }
 :root[data-theme="light"] code {
   background: var(--code-bg);
-  color: #b3121a;
+  color: #b45309;
   border-color: var(--border);
 }
 :root[data-theme="light"] .q .opt.correct {
@@ -709,8 +709,8 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   color: #1f8a3b;
 }
 :root[data-theme="light"] .q .opt.wrong {
-  background: rgba(215,25,33,0.12);
-  color: #b3121a;
+  background: rgba(185,28,28,0.12);
+  color: #b91c1c;
 }
 :root[data-theme="light"] ::selection {
   background: var(--accent); color: #fff;
