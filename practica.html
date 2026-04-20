@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIS — Práctica, cuestionarios y tests</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="top-nav">
+  <div class="crumb"><a href="index.html">IIS</a> · <strong>Práctica</strong></div>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="01-introduccion.html">01</a>
+    <a href="02-ciclos-de-vida.html">02</a>
+    <a href="03-metodologias-agiles.html">03</a>
+    <a href="04-extraccion-requerimientos.html">04</a>
+    <a href="05-procesos-de-negocio.html">05</a>
+    <a href="06-requerimientos.html">06</a>
+    <a href="07-especificacion.html">07</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <span class="chip">ZONA DE PRÁCTICA</span>
+    <h1>Cuestionarios, tests y flashcards</h1>
+    <p class="sub">Todo el material de práctica en un solo lugar. Modo examen con cronómetro, práctica por capítulo y flashcards consolidadas. Tu progreso queda guardado en el navegador.</p>
+  </div>
+
+  <div class="grid" id="stats-grid">
+    <div class="kpi"><span class="n" id="stat-best">—</span><span class="l">Mejor puntaje (examen)</span></div>
+    <div class="kpi"><span class="n" id="stat-attempts">0</span><span class="l">Intentos realizados</span></div>
+    <div class="kpi"><span class="n" id="stat-avg">—</span><span class="l">Promedio</span></div>
+    <div class="kpi"><span class="n" id="stat-last">—</span><span class="l">Último puntaje</span></div>
+  </div>
+
+  <div class="tabs" id="practice-tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="exam">🎯 Modo examen</button>
+      <button class="tab-btn" data-tab="chapter">📚 Por capítulo</button>
+      <button class="tab-btn" data-tab="flash">🧠 Flashcards</button>
+      <button class="tab-btn" data-tab="fast">⚡ Verdadero/Falso</button>
+    </div>
+
+    <div class="tab-panel active" data-tab="exam">
+      <div class="card accent">
+        <h3 style="margin-top:0">Modo examen</h3>
+        <p>15 preguntas aleatorias de los 7 capítulos. Tenés <strong>10 minutos</strong>. Al final ves el score y en qué capítulos fallaste más.</p>
+        <div class="exam-controls">
+          <label>Cantidad:
+            <select id="exam-count">
+              <option value="10">10</option>
+              <option value="15" selected>15</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </label>
+          <label>Tiempo:
+            <select id="exam-time">
+              <option value="300">5 min</option>
+              <option value="600" selected>10 min</option>
+              <option value="900">15 min</option>
+              <option value="0">Sin límite</option>
+            </select>
+          </label>
+          <button class="btn-primary" id="exam-start">Arrancar examen</button>
+        </div>
+      </div>
+
+      <div id="exam-runtime" style="display:none">
+        <div class="exam-bar">
+          <div class="exam-timer" id="exam-timer">10:00</div>
+          <div class="exam-progress"><div id="exam-progress-fill"></div></div>
+          <div class="exam-counter" id="exam-counter">1 / 15</div>
+        </div>
+        <div id="exam-questions"></div>
+        <div class="pager" style="margin-top:1rem">
+          <button class="btn-secondary" id="exam-prev">← Anterior</button>
+          <button class="btn-primary" id="exam-next">Siguiente →</button>
+          <button class="btn-primary" id="exam-submit" style="display:none">Terminar examen</button>
+        </div>
+      </div>
+
+      <div id="exam-result" style="display:none"></div>
+    </div>
+
+    <div class="tab-panel" data-tab="chapter">
+      <div class="card">
+        <h3 style="margin-top:0">Elegí un capítulo</h3>
+        <div class="grid" id="chapter-cards"></div>
+      </div>
+      <div id="chapter-quiz"></div>
+    </div>
+
+    <div class="tab-panel" data-tab="flash">
+      <div class="card">
+        <h3 style="margin-top:0">Flashcards consolidadas</h3>
+        <p>Click en cada tarjeta para dar vuelta. Filtrá por capítulo si querés focalizar.</p>
+        <div class="tab-buttons" id="flash-filter" style="margin-bottom:1rem">
+          <button class="tab-btn active" data-ch="all">Todos</button>
+          <button class="tab-btn" data-ch="1">01</button>
+          <button class="tab-btn" data-ch="2">02</button>
+          <button class="tab-btn" data-ch="3">03</button>
+          <button class="tab-btn" data-ch="4">04</button>
+          <button class="tab-btn" data-ch="5">05</button>
+          <button class="tab-btn" data-ch="6">06</button>
+          <button class="tab-btn" data-ch="7">07</button>
+        </div>
+        <div class="flashcards" id="flash-grid"></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-tab="fast">
+      <div class="card">
+        <h3 style="margin-top:0">Ronda rápida — Verdadero o Falso</h3>
+        <p>20 afirmaciones. Respondé rápido. Al final, explicación de cada una.</p>
+        <button class="btn-primary" id="tf-start">Arrancar ronda</button>
+        <div id="tf-runtime" style="display:none;margin-top:1rem"></div>
+        <div id="tf-result" style="display:none;margin-top:1rem"></div>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:var(--text-dim);margin-top:3rem;font-size:0.85rem;text-align:center">
+    Todas las preguntas salen del material oficial de los 7 apuntes. Tu progreso se guarda solo en tu navegador.
+  </p>
+</div>
+
+<script src="assets/questions.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/practice.js"></script>
+</body>
+</html>
