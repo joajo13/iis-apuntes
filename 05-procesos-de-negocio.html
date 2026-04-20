@@ -6,6 +6,7 @@
 <title>05 · Procesos de negocio — IIS</title>
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="assets/theme.js" defer></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -117,20 +118,55 @@ flowchart LR
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Diferencia clave: actividad vs. flujo</div>
-      <div class="flashcard-back">El diagrama de actividad permite paralelismo.</div>
+      <div class="flashcard-front">Diagrama de actividad vs. de flujo</div>
+      <div class="flashcard-back">
+        <p>Ambos representan procesos paso a paso, pero:</p>
+        <ul>
+          <li><strong>Diagrama de flujo:</strong> estrictamente secuencial (un camino activo por vez).</li>
+          <li><strong>Diagrama de actividad (UML):</strong> permite <strong>paralelismo</strong> con barras de sincronización (<em>split</em>/<em>merge</em>) y <em>swimlanes</em> para indicar responsables.</li>
+        </ul>
+        <p>Por eso el de actividad es más apto para modelar procesos de negocio reales.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Swimlanes</div>
-      <div class="flashcard-back">Columnas por responsable.</div>
+      <div class="flashcard-front">Swimlanes (carriles)</div>
+      <div class="flashcard-back">
+        <p>Columnas (o filas) dentro de un diagrama de actividad / BPMN que agrupan las acciones por <strong>responsable</strong> (persona, rol, área o sistema).</p>
+        <p>Sirven para visualizar quién hace qué y detectar cuellos de botella, responsabilidades compartidas o handoffs entre áreas.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Split vs. Merge</div>
-      <div class="flashcard-back">Split: dividir en paralelo. Merge: esperar que todos lleguen.</div>
+      <div class="flashcard-front">Split vs Merge (sincronización)</div>
+      <div class="flashcard-back">
+        <p><strong>Split (división):</strong> una barra horizontal desde la que salen varios caminos paralelos. Todos se ejecutan simultáneamente.</p>
+        <p><strong>Merge (sincronización):</strong> una barra que recibe varios caminos. El flujo continúa <strong>solo cuando todos llegaron</strong>.</p>
+        <p>Permiten modelar concurrencia real sin ambigüedad.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Versión vigente BPMN</div>
-      <div class="flashcard-back">2.0 (2009, OMG).</div>
+      <div class="flashcard-front">BPMN 2.0</div>
+      <div class="flashcard-back">
+        <p><strong>Business Process Model and Notation</strong> (OMG, 2009). Versión vigente: 2.0.</p>
+        <p>Notación estándar para modelar procesos de negocio. 4 categorías de elementos:</p>
+        <ul>
+          <li><strong>Flujo</strong> — eventos, actividades, gateways.</li>
+          <li><strong>Conexión</strong> — flujos de secuencia, mensajes, asociaciones.</li>
+          <li><strong>Contenedores</strong> — pools y lanes.</li>
+          <li><strong>Artefactos</strong> — objetos de datos, anotaciones, grupos.</li>
+        </ul>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">BPM — Business Process Management</div>
+      <div class="flashcard-back">
+        <p>Disciplina de <strong>gestión sistemática</strong> de los procesos de negocio (manuales y automatizados) enfocada en mejorarlos continuamente.</p>
+        <p>Los <strong>expertos de negocio</strong> modelan y monitorean los procesos; <strong>IT</strong> los ejecuta/automatiza en motores BPM.</p>
+        <p>Ciclo: modelar → ejecutar → monitorear → optimizar.</p>
+      </div>
     </div></div>
   </div>
 

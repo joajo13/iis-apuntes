@@ -640,5 +640,91 @@ details > *:not(summary) { margin-top: 0.75rem; }
 html, body { overflow-x: hidden; max-width: 100%; }
 img, svg, video, canvas { max-width: 100%; height: auto; }
 
+/* ========================= THEME TOGGLE ========================= */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.theme-toggle:hover { border-color: var(--text); color: var(--accent); }
+.theme-toggle svg { display: block; }
+
+.theme-toggle--floating {
+  position: fixed;
+  top: 1rem; right: 1rem;
+  z-index: 60;
+  background: var(--bg-card);
+}
+@media (max-width: 720px) {
+  .theme-toggle--floating { top: 0.75rem; right: 0.75rem; font-size: 0.65rem; padding: 0.3rem 0.6rem; }
+}
+
+/* ========================= LIGHT THEME ========================= */
+:root[data-theme="light"] {
+  --bg: #f5f5f5;
+  --bg-soft: #ececec;
+  --bg-card: #ffffff;
+  --muted: #f0f0f0;
+  --border: #e0e0e0;
+  --border-strong: #cccccc;
+  --text: #111111;
+  --text-dim: #555555;
+  --text-disabled: #888888;
+  --accent: #d71921;
+  --accent-2: #111111;
+  --ok: #1f8a3b;
+  --warn: #b8860b;
+  --err: #d71921;
+  --code-bg: #f0f0f0;
+}
+
+:root[data-theme="light"] .top-nav {
+  background: rgba(245,245,245,0.85);
+}
+:root[data-theme="light"] .exam-bar {
+  background: rgba(255,255,255,0.9);
+}
+:root[data-theme="light"] .flashcard-back {
+  color: #fff;
+}
+:root[data-theme="light"] code {
+  background: var(--code-bg);
+  color: #b3121a;
+  border-color: var(--border);
+}
+:root[data-theme="light"] .q .opt.correct {
+  background: rgba(31,138,59,0.12);
+  color: #1f8a3b;
+}
+:root[data-theme="light"] .q .opt.wrong {
+  background: rgba(215,25,33,0.12);
+  color: #b3121a;
+}
+:root[data-theme="light"] ::selection {
+  background: var(--accent); color: #fff;
+}
+:root[data-theme="light"] .btn-primary { color: #fff; background: #111; border-color: #111; }
+:root[data-theme="light"] .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Diagramas SVG que usan blancos/fills oscuros no se leen bien en claro —
+   suavizar con un leve fondo oscuro de tarjeta para mantener contraste */
+:root[data-theme="light"] .diagram { background: #0d1117; }
+:root[data-theme="light"] .diagram figcaption { color: #8b949e; }
+:root[data-theme="light"] .diagram.diagram-light { background: #f8fafc; }
+:root[data-theme="light"] .diagram.diagram-light figcaption { color: #475569; }
+:root[data-theme="light"] .mermaid { background: #0d1117; }
+
 /* ========================= SELECTION ========================= */
 ::selection { background: var(--accent); color: #fff; }

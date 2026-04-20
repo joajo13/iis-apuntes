@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="assets/theme.js" defer></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -131,20 +132,74 @@ flowchart LR
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Estándar del SRS</div>
-      <div class="flashcard-back">IEEE Std. 830-1998.</div>
+      <div class="flashcard-front">SRS — Software Requirements Specification</div>
+      <div class="flashcard-back">
+        <p>Documento que describe el <strong>comportamiento externo</strong> del software: qué debe hacer, bajo qué restricciones, y en qué entorno.</p>
+        <p>Estándar de referencia: <strong>IEEE Std 830-1998</strong>.</p>
+        <p>Es entrada para diseño, pruebas, plan de proyecto y contrato. No describe el "cómo" (eso va en el diseño).</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Qué significa SMART</div>
-      <div class="flashcard-back">Specific, Measurable, Attainable, Realizable, Traceable.</div>
+      <div class="flashcard-front">Atributos de un buen SRS</div>
+      <div class="flashcard-back">
+        <p>Un SRS debe ser:</p>
+        <ul>
+          <li><strong>Correcto</strong> y <strong>completo</strong>.</li>
+          <li><strong>No ambiguo</strong> — una única interpretación.</li>
+          <li><strong>Verificable</strong> — se puede probar si se cumple.</li>
+          <li><strong>Consistente</strong> — sin contradicciones internas.</li>
+          <li><strong>Modificable</strong>, <strong>rastreable</strong> y <strong>anotado</strong> (p. ej. por importancia/estabilidad).</li>
+          <li><strong>Entendible</strong> por clientes y desarrolladores.</li>
+        </ul>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Estático vs. dinámico</div>
-      <div class="flashcard-back">Estático = capacidad. Dinámico = performance.</div>
+      <div class="flashcard-front">SMART — redacción de no funcionales</div>
+      <div class="flashcard-back">
+        <p>Criterio para que un requerimiento (especialmente no funcional) sea útil:</p>
+        <ul>
+          <li><strong>S</strong>pecific — específico, no genérico.</li>
+          <li><strong>M</strong>easurable — medible cuantitativamente.</li>
+          <li><strong>A</strong>ttainable — alcanzable técnicamente.</li>
+          <li><strong>R</strong>ealizable — realizable con los recursos.</li>
+          <li><strong>T</strong>raceable — rastreable a su origen.</li>
+        </ul>
+        <p><em>"Debe ser rápido"</em> ❌ → <em>"Debe responder en &lt; 2 s con 1000 usuarios concurrentes"</em> ✅.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">¿Qué NO incluye el SRS?</div>
-      <div class="flashcard-back">Costos, cronogramas, diseños, planes de prueba.</div>
+      <div class="flashcard-front">Cuantificación: Estático vs Dinámico</div>
+      <div class="flashcard-back">
+        <p><strong>Estático (capacidad):</strong> cantidades fijas que el sistema soporta — usuarios registrados, volumen de datos, tamaño máximo de archivo.</p>
+        <p><strong>Dinámico (performance):</strong> medidas de comportamiento en el tiempo — transacciones por segundo, tiempo de respuesta, throughput, tasa de errores.</p>
+        <p>Ambos son no funcionales y deben cumplir SMART.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Qué NO incluye el SRS</div>
+      <div class="flashcard-back">
+        <p>El SRS describe el <em>qué</em>, no el <em>cómo</em> ni la gestión del proyecto. Por eso <strong>NO</strong> contiene:</p>
+        <ul>
+          <li>Planes de proyecto, costos ni cronogramas.</li>
+          <li>Diseños técnicos o de arquitectura.</li>
+          <li>Planes de prueba ni manuales de usuario.</li>
+          <li>Decisiones de implementación.</li>
+        </ul>
+        <p>Esas cosas consumen el SRS como entrada, pero van en otros documentos.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Validación vs Verificación</div>
+      <div class="flashcard-back">
+        <p><strong>Validación:</strong> "¿estamos construyendo el producto correcto?" — contrasta el SRS con lo que <em>realmente</em> quiere el cliente.</p>
+        <p><strong>Verificación:</strong> "¿estamos construyendo el producto correctamente?" — contrasta el software con el SRS.</p>
+        <p>La validación pelea contra requisitos equivocados; la verificación, contra implementación equivocada.</p>
+      </div>
     </div></div>
   </div>
 

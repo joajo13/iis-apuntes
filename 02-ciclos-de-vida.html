@@ -6,6 +6,7 @@
 <title>02 · Ciclos de vida — IIS</title>
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="assets/theme.js" defer></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -517,20 +518,70 @@
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Cascada en una palabra</div>
-      <div class="flashcard-back">Rígido. Etapas secuenciales.</div>
+      <div class="flashcard-front">Modelo Cascada — características y uso</div>
+      <div class="flashcard-back">
+        <p>Modelo <strong>secuencial y rígido</strong>: cada etapa debe terminar al 100% antes de iniciar la siguiente (Análisis → Diseño → Codificación → Pruebas → Integración → Operación y mantenimiento).</p>
+        <p><strong>Ventajas:</strong> fácil de administrar, cronogramable, todo el equipo en la misma etapa.</p>
+        <p><strong>Desventajas:</strong> rígido, el cliente no ve avances hasta las pruebas, difícil absorber cambios.</p>
+        <p><strong>Cuándo:</strong> requisitos completamente definidos y estables.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Aporte único del espiral</div>
-      <div class="flashcard-back">Análisis de riesgos.</div>
+      <div class="flashcard-front">Espiral (Boehm, 1988) — aporte clave</div>
+      <div class="flashcard-back">
+        <p>Gran aporte: introduce el <strong>análisis de riesgos</strong> como actividad propia del ciclo de vida.</p>
+        <p>El proyecto es una <strong>suma de mini-proyectos</strong>. Cada vuelta cubre 4 cuadrantes:</p>
+        <ol>
+          <li>Determinar objetivos, alternativas y restricciones.</li>
+          <li>Evaluar alternativas e identificar/resolver riesgos.</li>
+          <li>Desarrollar y verificar el producto.</li>
+          <li>Planificar las fases siguientes.</li>
+        </ol>
+        <p>El <strong>radio</strong> de la espiral representa el coste acumulado.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Fases de RUP</div>
-      <div class="flashcard-back">Inicio, Elaboración, Construcción, Transición.</div>
+      <div class="flashcard-front">Incremental (entrega por etapas)</div>
+      <div class="flashcard-back">
+        <p>Extiende cascada: se especifica una vez, se descompone en <strong>sub-sistemas operativos</strong> priorizados, y cada uno se diseña/codifica/prueba/entrega al cliente mientras otros siguen en desarrollo (solapados).</p>
+        <p><strong>Ventajas:</strong> entregas tempranas, feedback rápido, priorización, menor riesgo de integración.</p>
+        <p><strong>Desventajas:</strong> exige sistema descomponible, requisitos estables y una buena arquitectura global desde el inicio.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Descartable → ?</div>
-      <div class="flashcard-back">Prototipo evolutivo (se refina, no se tira).</div>
+      <div class="flashcard-front">Prototipos: descartables vs evolutivos</div>
+      <div class="flashcard-back">
+        <p>Un <strong>prototipo</strong> simula el funcionamiento del sistema para clarificar requisitos cuando el cliente no sabe qué quiere.</p>
+        <p><strong>Ligeros:</strong> bocetos / mockups de pantallas. <strong>Operativos:</strong> módulos funcionales.</p>
+        <p><strong>Evolución histórica:</strong> antes eran <em>descartables</em> (borradores que se tiraban) → el cliente no entendía por qué se descartaba trabajo → pasaron a ser <strong>evolutivos</strong> (se refinan y se conservan en el producto final).</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Modelo Evolutivo</div>
+      <div class="flashcard-back">
+        <p>Ciclos que enlazan <strong>especificación, desarrollo y validación</strong>. Cada ciclo genera un sistema completo que el cliente usa; el feedback alimenta el ciclo siguiente.</p>
+        <p><strong>Útil cuando:</strong> hay desconocimiento del negocio, urgencia extrema o entorno muy cambiante.</p>
+        <p><strong>Diferencia con incremental:</strong> en evolutivo los requisitos mismos evolucionan; en incremental son estables y solo cambia lo que se entrega.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">RUP — Rational Unified Process</div>
+      <div class="flashcard-back">
+        <p>Proceso <strong>iterativo e incremental</strong> asociado a <strong>UML</strong> (Jacobson, Booch, Rumbaugh).</p>
+        <p>4 fases:</p>
+        <ol>
+          <li><strong>Inicio:</strong> procesos de negocio y actores.</li>
+          <li><strong>Elaboración:</strong> arquitectura y casos de uso.</li>
+          <li><strong>Construcción:</strong> diseño, código y pruebas.</li>
+          <li><strong>Transición:</strong> puesta en entorno real.</li>
+        </ol>
+        <p>Cada fase contiene iteraciones que atraviesan los flujos de trabajo (requisitos, análisis, diseño, implementación, pruebas).</p>
+      </div>
     </div></div>
   </div>
 

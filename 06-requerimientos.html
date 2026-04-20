@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="assets/theme.js" defer></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -144,20 +145,81 @@ flowchart TB
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">% proyectos exitosos (Standish)</div>
-      <div class="flashcard-back">28% sobre 280.000 proyectos (año 2000).</div>
+      <div class="flashcard-front">¿Qué es un requerimiento?</div>
+      <div class="flashcard-back">
+        <p><strong>Pfleeger:</strong> "Una característica del sistema o una descripción de algo que el sistema es capaz de hacer para satisfacer su propósito."</p>
+        <p><strong>IEEE 610-1990:</strong></p>
+        <ol>
+          <li>Condición o capacidad que necesita el usuario para resolver un problema.</li>
+          <li>Condición o capacidad que debe satisfacer un sistema o componente para cumplir un contrato, estándar o especificación.</li>
+        </ol>
+        <p>Es la <strong>base del contrato</strong> entre cliente y equipo.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">4 etapas de la IR</div>
-      <div class="flashcard-back">Extracción, análisis, especificación, validación.</div>
+      <div class="flashcard-front">Funcional vs No funcional</div>
+      <div class="flashcard-back">
+        <p><strong>Funcional:</strong> describe QUÉ hace el sistema — entradas, salidas, comportamiento ante cada estímulo, casos válidos e inválidos.</p>
+        <p><em>Ej: "el sistema debe registrar pedidos validando stock antes de confirmar."</em></p>
+        <p><strong>No funcional:</strong> describe RESTRICCIONES sobre el sistema o sobre cómo se desarrolla — performance, seguridad, portabilidad, lenguaje, plataforma.</p>
+        <p><em>Ej: "el sistema debe responder en &lt; 2 s", "debe usar PostgreSQL".</em></p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Funcional vs. no funcional</div>
-      <div class="flashcard-back">Funcional = qué hace. No funcional = restricciones.</div>
+      <div class="flashcard-front">Ingeniería de Requerimientos — 4 etapas</div>
+      <div class="flashcard-back">
+        <ol>
+          <li><strong>Extracción:</strong> obtener información del cliente y usuarios (entrevistas, cuestionarios, observación).</li>
+          <li><strong>Análisis:</strong> procesar la información, detectar ambigüedades, conflictos y omisiones.</li>
+          <li><strong>Especificación:</strong> documentar formalmente en el SRS.</li>
+          <li><strong>Validación:</strong> el cliente confirma que lo especificado refleja lo que quiere.</li>
+        </ol>
+        <p>Es iterativa: los cambios vuelven a extracción.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Multiplicador de costo</div>
-      <div class="flashcard-back">Hasta ×5000 en producción vs. requisitos.</div>
+      <div class="flashcard-front">Costo de los errores por etapa</div>
+      <div class="flashcard-back">
+        <p>Un error cuesta exponencialmente más mientras más tarde se detecta:</p>
+        <ul>
+          <li>En <strong>requerimientos</strong>: costo base (×1).</li>
+          <li>En <strong>diseño</strong>: ×5 a ×10.</li>
+          <li>En <strong>codificación</strong>: ×20.</li>
+          <li>En <strong>pruebas</strong>: ×50.</li>
+          <li>En <strong>producción</strong>: hasta <strong>×5000</strong>.</li>
+        </ul>
+        <p>Por eso la inversión en una buena IR paga solo.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Standish Group — números del fracaso</div>
+      <div class="flashcard-back">
+        <p>Estudio sobre 280.000 proyectos (año 2000):</p>
+        <ul>
+          <li><strong>28% exitosos</strong> (a tiempo, presupuesto y alcance).</li>
+          <li>El resto se pasa de tiempo/costo o se cancela.</li>
+          <li><strong>Causa #1 de fracaso:</strong> requisitos deficientes, incompletos o cambiantes.</li>
+        </ul>
+        <p>Fundamenta la importancia de la IR.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Defectos comunes en los requerimientos</div>
+      <div class="flashcard-back">
+        <ul>
+          <li>Falta de involucramiento del cliente.</li>
+          <li>Cambios sin gestión del impacto.</li>
+          <li>Ambigüedades (dos interpretaciones posibles).</li>
+          <li>Requisitos innecesarios (los agrega el dev).</li>
+          <li>Requisitos insuficientes (descripción superficial).</li>
+          <li>Omisión de grupos de usuarios.</li>
+        </ul>
+      </div>
     </div></div>
   </div>
 
@@ -194,6 +256,49 @@ flowchart TB
       <div class="explain">Por eso tanto énfasis en la ingeniería de requerimientos.</div>
     </div>
   </div>
+
+  <h2>Preguntas tipo parcial</h2>
+  <details>
+    <summary><strong>P6 · ¿Qué es un requerimiento? Explique las diferencias entre requerimiento funcional y no funcional.</strong> <em>(2 puntos)</em></summary>
+    <div class="card accent">
+      <h3 style="margin-top:0">Requerimiento</h3>
+      <p>Según <strong>Pfleeger</strong>, un requerimiento es <em>"una característica del sistema o una descripción de algo que el sistema es capaz de hacer con el objeto de satisfacer el propósito del sistema"</em>.</p>
+      <p>La <strong>IEEE 610-1990</strong> lo define como:</p>
+      <ol>
+        <li>Condición o capacidad que necesita un <strong>usuario</strong> para resolver un problema o alcanzar un objetivo.</li>
+        <li>Condición o capacidad que debe satisfacer un <strong>sistema o componente</strong> para cumplir un contrato, estándar o especificación.</li>
+      </ol>
+      <p>Es la <strong>base del contrato</strong> entre cliente y equipo, y entrada de todo el proceso de desarrollo. Un requerimiento debe ser preferentemente <em>correcto, completo, verificable, no ambiguo, consistente y rastreable</em>.</p>
+
+      <h3>Requerimiento funcional</h3>
+      <p>Describe <strong>qué debe hacer el sistema</strong>: las funciones, servicios o comportamientos observables. Especifica entradas, salidas, interacciones y cómo se comporta frente a cada estímulo (incluyendo casos inválidos o de error).</p>
+      <p><strong>Ejemplos:</strong></p>
+      <ul>
+        <li>"El sistema debe permitir al usuario registrar un pedido indicando productos, cantidades y dirección de entrega."</li>
+        <li>"Al confirmar un pedido, el sistema debe validar el stock y emitir un comprobante."</li>
+      </ul>
+
+      <h3>Requerimiento no funcional</h3>
+      <p>Describe <strong>restricciones sobre el sistema</strong> o sobre cómo se construye. No cambia qué hace el sistema, pero limita las opciones de diseño e implementación.</p>
+      <p>Incluye: <strong>performance, seguridad, disponibilidad, portabilidad, usabilidad, interoperabilidad</strong>, así como restricciones de plataforma, lenguaje o normativa.</p>
+      <p><strong>Ejemplos:</strong></p>
+      <ul>
+        <li>"El tiempo de respuesta a cualquier consulta debe ser menor a 2 segundos con 1000 usuarios concurrentes."</li>
+        <li>"El sistema debe desarrollarse en Java y desplegarse sobre PostgreSQL."</li>
+      </ul>
+
+      <h3>Diferencias clave</h3>
+      <table>
+        <thead><tr><th>Aspecto</th><th>Funcional</th><th>No funcional</th></tr></thead>
+        <tbody>
+          <tr><td>Qué describe</td><td>Qué hace el sistema</td><td>Cómo / bajo qué restricciones</td></tr>
+          <tr><td>Visibilidad</td><td>Observable en la operación</td><td>Observable en la calidad / contexto</td></tr>
+          <tr><td>Ejemplo típico</td><td>"Permite registrar pedidos"</td><td>"Responde en &lt;2 s"</td></tr>
+          <tr><td>Si falta</td><td>El sistema no cumple su propósito</td><td>El sistema cumple pero no es usable / aceptable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
 
   <div class="keypoints">
     <h3>🔑 Ideas clave para el parcial</h3>

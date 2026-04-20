@@ -6,6 +6,7 @@
 <title>04 · Extracción de requerimientos — IIS</title>
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="assets/theme.js" defer></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -121,20 +122,65 @@ flowchart TD
   <h2>Flashcards</h2>
   <div class="flashcards">
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">3 técnicas de extracción</div>
-      <div class="flashcard-back">Entrevista, cuestionario, observación directa.</div>
+      <div class="flashcard-front">Técnicas de extracción de requerimientos</div>
+      <div class="flashcard-back">
+        <p>3 técnicas básicas:</p>
+        <ul>
+          <li><strong>Entrevista:</strong> conversación dirigida con propósito específico. Riqueza de detalle.</li>
+          <li><strong>Cuestionario:</strong> preguntas escritas distribuidas a muchas personas. Útil para sondeo y dispersión geográfica.</li>
+          <li><strong>Observación directa:</strong> visita presencial al lugar de trabajo. Detecta procedimientos informales y el "cómo" real.</li>
+        </ul>
+        <p>Suelen combinarse: cuestionario para sondear, entrevistas para profundizar, observación para validar.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Estructura piramidal</div>
-      <div class="flashcard-back">Inductiva: de cerradas a abiertas.</div>
+      <div class="flashcard-front">Entrevista estructurada — qué es</div>
+      <div class="flashcard-back">
+        <p>Conversación dirigida con <strong>objetivos definidos</strong> (4–6 puntos), entrevistados seleccionados y <strong>tipo y estructura de preguntas planificados</strong> de antemano.</p>
+        <p>Planificación en 5 pasos: antecedentes → objetivos → selección → preparación → tipo/estructura de preguntas.</p>
+        <p>Duración recomendada: <strong>45 min – 1 h</strong>.</p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">Estructura embudo</div>
-      <div class="flashcard-back">Deductiva: de abiertas a cerradas.</div>
+      <div class="flashcard-front">Tipos de preguntas — abiertas, cerradas, de sondeo</div>
+      <div class="flashcard-back">
+        <p><strong>Abiertas:</strong> el entrevistado se explaya. <em>"¿Cómo es un día típico?"</em></p>
+        <p><strong>Cerradas:</strong> respuesta acotada (sí/no, número). <em>"¿Cuántas solicitudes procesan por día?"</em></p>
+        <p><strong>De sondeo:</strong> amplían o clarifican una respuesta previa. <em>"¿Por qué? ¿Puede dar un ejemplo?"</em></p>
+      </div>
     </div></div>
+
     <div class="flashcard"><div class="flashcard-inner">
-      <div class="flashcard-front">¿Para qué sirve la observación directa?</div>
-      <div class="flashcard-back">Detectar procedimientos informales y relaciones ocultas.</div>
+      <div class="flashcard-front">Estructuras de entrevista</div>
+      <div class="flashcard-back">
+        <p><strong>Piramidal (inductiva):</strong> cerradas → abiertas. Útil con entrevistados poco participativos.</p>
+        <p><strong>Embudo (deductiva):</strong> abiertas → cerradas. Útil cuando el entrevistado necesita expresarse.</p>
+        <p><strong>Diamante:</strong> cerradas → abiertas → cerradas. La más completa.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Errores al preguntar</div>
+      <div class="flashcard-back">
+        <p><strong>Tendenciosas:</strong> reflejan la opinión del entrevistador y sesgan la respuesta. <em>"¿Qué opina de este obsoleto método?"</em></p>
+        <p><strong>Dobles:</strong> dos preguntas en una; el entrevistado contesta solo una. <em>"¿Usa el sistema y cómo lo evalúa?"</em></p>
+        <p>Otros: preguntas demasiado técnicas, jerga ajena al entrevistado, no escuchar.</p>
+      </div>
+    </div></div>
+
+    <div class="flashcard"><div class="flashcard-inner">
+      <div class="flashcard-front">Observación directa — qué aporta</div>
+      <div class="flashcard-back">
+        <p>Visita presencial a los sectores afectados. Permite detectar lo que no aparece en entrevistas ni documentos:</p>
+        <ul>
+          <li>Procedimientos informales (atajos, workarounds).</li>
+          <li>Por qué se hacen las cosas de cierta manera.</li>
+          <li>Relaciones reales entre quienes toman decisiones.</li>
+          <li>Elementos físicos que facilitan la tarea.</li>
+        </ul>
+      </div>
     </div></div>
   </div>
 
@@ -171,6 +217,46 @@ flowchart TD
       <div class="explain">La palabra "obsoleto" revela la opinión del entrevistador y sesga la respuesta.</div>
     </div>
   </div>
+
+  <h2>Preguntas tipo parcial</h2>
+  <details>
+    <summary><strong>P2 · ¿Qué es una entrevista estructurada? ¿Qué tipos de preguntas puede contener? Brinde 2 ejemplos de cada tipo.</strong> <em>(2 puntos)</em></summary>
+    <div class="card accent">
+      <h3 style="margin-top:0">Entrevista estructurada</h3>
+      <p>Es una <strong>conversación dirigida y planificada</strong> entre el analista y uno o más representantes de la organización, con el fin de obtener información sobre los procesos y requerimientos del sistema. Se llama <em>estructurada</em> porque la planificación cubre 5 pasos:</p>
+      <ol>
+        <li><strong>Lectura de antecedentes:</strong> familiarizarse con la organización y el vocabulario del negocio.</li>
+        <li><strong>Determinar objetivos:</strong> 4–6 puntos principales a cubrir.</li>
+        <li><strong>Seleccionar a quién entrevistar:</strong> personas de distintos niveles afectados por el sistema.</li>
+        <li><strong>Preparar al entrevistado:</strong> avisarle con anticipación; duración máxima 45 min – 1 h.</li>
+        <li><strong>Determinar tipo y estructura de preguntas.</strong></li>
+      </ol>
+      <p>La <strong>estructura</strong> puede ser <em>piramidal</em> (cerradas → abiertas), <em>embudo</em> (abiertas → cerradas) o <em>diamante</em> (cerradas → abiertas → cerradas).</p>
+
+      <h3>Tipos de preguntas y ejemplos</h3>
+
+      <h4>Abiertas</h4>
+      <p>El entrevistado se explaya libremente. Aportan riqueza de detalle y vocabulario del negocio.</p>
+      <ul>
+        <li><em>"¿Cómo es un día típico de trabajo en tu sector?"</em></li>
+        <li><em>"¿Qué dificultades enfrentan habitualmente al procesar un pedido?"</em></li>
+      </ul>
+
+      <h4>Cerradas</h4>
+      <p>La respuesta está acotada (sí/no, número, opción). Sirven para obtener datos concretos rápido.</p>
+      <ul>
+        <li><em>"¿Cuántas solicitudes procesan por día?"</em></li>
+        <li><em>"¿El sistema actual permite exportar a Excel? (sí/no)"</em></li>
+      </ul>
+
+      <h4>De sondeo</h4>
+      <p>Amplían o clarifican una respuesta previa, para profundizar en un tema.</p>
+      <ul>
+        <li><em>"¿Por qué lo hacen de esa manera?"</em></li>
+        <li><em>"¿Puede darme un ejemplo concreto de la última vez que pasó eso?"</em></li>
+      </ul>
+    </div>
+  </details>
 
   <div class="keypoints">
     <h3>🔑 Ideas clave para el parcial</h3>
