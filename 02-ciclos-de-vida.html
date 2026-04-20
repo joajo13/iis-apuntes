@@ -215,6 +215,93 @@
     </div>
   </div>
 
+  <h3>Los 4 cuadrantes en detalle</h3>
+  <div class="grid">
+    <div class="card accent">
+      <h4 style="margin-top:0">① Determinar objetivos, alternativas y restricciones</h4>
+      <ul>
+        <li>Se definen los <strong>objetivos del ciclo</strong> actual (rendimiento, funcionalidad).</li>
+        <li>Se enumeran <strong>alternativas</strong>: diseño propio, reutilización, componentes de terceros, compra.</li>
+        <li>Se establecen <strong>restricciones</strong>: costo, cronograma, interfaces requeridas.</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h4 style="margin-top:0">② Evaluar alternativas, identificar y resolver riesgos</h4>
+      <ul>
+        <li>Se evalúan las alternativas respecto a los objetivos y restricciones.</li>
+        <li>Se <strong>identifican riesgos</strong> (técnicos, económicos, de requisitos).</li>
+        <li>Para resolver riesgos de requisitos → se construye un <strong>prototipo</strong>.</li>
+        <li>Si hay riesgos críticos no resueltos, el proyecto puede cancelarse.</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h4 style="margin-top:0">③ Desarrollar y verificar el producto</h4>
+      <ul>
+        <li>Se aplica el <strong>modelo de desarrollo más adecuado</strong> según el riesgo identificado.</li>
+        <li>Puede ser cascada, incremental, prototipos, etc.</li>
+        <li>Resultado: un incremento verificado del producto.</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <h4 style="margin-top:0">④ Planificar las fases siguientes</h4>
+      <ul>
+        <li>Se <strong>revisa</strong> el progreso y los productos del ciclo.</li>
+        <li>Se <strong>planifica</strong> la próxima vuelta: objetivos, equipo, cronograma.</li>
+        <li>El cliente participa en la revisión antes de comenzar el siguiente ciclo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Etapas típicas por ciclo</h3>
+  <p>Cada vuelta de la espiral produce un incremento más concreto del producto. El radio crece porque el <strong>costo acumulado</strong> aumenta en cada ciclo.</p>
+  <table>
+    <thead>
+      <tr><th>Ciclo</th><th>Actividad principal (cuadrante ③)</th><th>Prototipo / entregable</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1 · Concepto</strong></td>
+        <td>Definición del concepto de operación: ¿qué hace el sistema? ¿para quién?</td>
+        <td>Prototipo de concepto (boceto o mockup)</td>
+      </tr>
+      <tr>
+        <td><strong>2 · Requerimientos</strong></td>
+        <td>Elicitación y análisis de requerimientos del software; construcción de modelo de casos de uso.</td>
+        <td>Prototipo de requerimientos (prototipo 2)</td>
+      </tr>
+      <tr>
+        <td><strong>3 · Diseño</strong></td>
+        <td>Diseño de la arquitectura y los módulos del sistema; prototipo operativo.</td>
+        <td>Prototipo operativo</td>
+      </tr>
+      <tr>
+        <td><strong>4 · Implementación</strong></td>
+        <td>Codificación → Integración → Pruebas de unidad e integración → Prueba de aceptación.</td>
+        <td>Sistema operativo entregado al cliente</td>
+      </tr>
+    </tbody>
+  </table>
+  <blockquote>El radio de la espiral representa el <strong>costo acumulado</strong>. Cada vuelta = un mini-proyecto completo que atraviesa los 4 cuadrantes.</blockquote>
+  <div class="grid">
+    <div class="card ok">
+      <h3 style="margin-top:0">Ventajas</h3>
+      <ul>
+        <li>Incorpora <strong>análisis de riesgos</strong> como actividad explícita.</li>
+        <li>Flexible: en cada ciclo se elige el modelo de desarrollo más conveniente.</li>
+        <li>El cliente ve avances en cada vuelta.</li>
+        <li>Permite cancelar tempranamente si los riesgos son insalvables.</li>
+      </ul>
+    </div>
+    <div class="card err">
+      <h3 style="margin-top:0">Desventajas</h3>
+      <ul>
+        <li>Requiere experiencia en <strong>identificación de riesgos</strong>.</li>
+        <li>Puede ser caro y complejo de gestionar.</li>
+        <li>No siempre se puede estimar cuántas vueltas serán necesarias.</li>
+      </ul>
+    </div>
+  </div>
+
   <h2>3 · Incremental (entrega por etapas)</h2>
   <p>Le suma flexibilidad a cascada. Soluciona su mayor problema: el cliente no veía nada hasta el final.</p>
   <ol>
